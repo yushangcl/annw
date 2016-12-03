@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.1.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+>    <!-- mvc controller -->
+    <context:component-scan base-package="top.annwz.base.action" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- spring mvc 开启注解扫描-->
+    <mvc:annotation-driven>
+    </mvc:annotation-driven>
+
+    <!-- 采用session方式保存local-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+
+    <mvc:default-servlet-handler/>
+    <bean id="basicDruidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="driverClassName" value="${basic.jdbc.driverClassName}"/>
+        <property name="url" value="${basic.jdbc.url}"/>
+        <property name="username" value="${basic.jdbc.username}"/>
+        <property name="password" value="${basic.jdbc.password}"/>
+
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="${basic.jdbc.filters}"/>
+    </bean>
+
+    <bean id="basicSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="basicDruidDataSource"/>
+        <property name="typeAliasesPackage" value="top.annwz.base.entity"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--  将base里的mapper也扫描到 -->
+        <property name="basePackage" value="top.annwz.base.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="basicSqlSessionFactory"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="basicSqlSessionFactory"/>
+    </bean>
+    <!--jdbc,mybatis配置 结束  -->
+
+    <!-- 包扫描-->
+    <context:component-scan base-package="top.annwz.base.dubbo.service"/>
+
+    <!--  2  事务配置 开始 -->
+    <bean id="basicTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="basicDruidDataSource"/>
+    </bean>
+
+    <!-- 2.1 拦截器管理事务 方式 开始-->
+    <bean id="basicTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+
+        <property name="transactionManager">
+            <ref bean="basicTransactionManager"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="insert*">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+                <prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*Service</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>basicTransactionInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <!---->
+    <!-- 拦截器管理事务 方式 结束 -->
+
+    <!-- 2.2 注解管理事务 方式 开始   作为2.1的补充。可以在实现层自行判断 是否需要添加事务。注：类内方法间的调用不走经过aop，所以事务无效。需要尽量避免这种情况，要么2个方法都加事务，要么2个方法不写在同一个类中。-->
+    <tx:annotation-driven transaction-manager="basicTransactionManager"/>
+    <!--   注解管理事务 方式 结束 -->
+
+</beans>
