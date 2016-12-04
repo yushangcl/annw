@@ -35,7 +35,7 @@ public class sendEmailUtilTest {
 		String to = "623281847@qq.com"; // 收件人，多个收件人以半角逗号分隔
 		String cc = "1941247390@qq.com"; // 抄送，多个抄送以半角逗号分隔
 		String subject = "这是邮件的主题"; // 主题
-		String body = "<h2>这是邮件的正文</h2>"; // 正文，可以用html格式的哟
+		String body = "<h2 style='color:red'>这是邮件的正文</h2>"; // 正文，可以用html格式的哟
 		List<String> attachments = Arrays.asList("D:\\test.txt"); // 附件的路径，多个附件也不怕
 
 		EmailUtil email = EmailUtil.entity(smtpHost, userName, password, to, cc, subject, body, attachments);
