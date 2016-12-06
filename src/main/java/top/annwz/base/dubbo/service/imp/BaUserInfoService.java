@@ -12,13 +12,9 @@ import javax.annotation.Resource;
  * Created by Wuhuahui on 2016/12/5.
  */
 @Service
-public class BaUserInfoService extends BasicService<BaUserInfo> implements IBaUserInfoService {
+public class BaUserInfoService implements IBaUserInfoService {
 
 	@Resource
 	private BaUserInfoMapper baUserInfoMapper;
 
-	@Override
-	public IBasicDao<BaUserInfo> getDao() {
-		return baUserInfoMapper;
-	}
 }

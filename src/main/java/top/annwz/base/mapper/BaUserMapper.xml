@@ -20,8 +20,8 @@
     user_id, user_name, password, mobile, email, password_change_next, locked, locked_date, 
     face_url, create_time, update_time, create_user_id, update_user_id
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+  <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from ba_user
     where user_id = #{userId,jdbcType=INTEGER}
@@ -31,15 +31,15 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="top.annwz.base.entity.BaUser">
-    insert into ba_user (user_id, user_name, password, 
-      mobile, email, password_change_next, 
-      locked, locked_date, face_url, 
-      create_time, update_time, create_user_id, 
+    insert into ba_user (user_id, user_name, password,
+      mobile, email, password_change_next,
+      locked, locked_date, face_url,
+      create_time, update_time, create_user_id,
       update_user_id)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{passwordChangeNext,jdbcType=INTEGER}, 
-      #{locked,jdbcType=INTEGER}, #{lockedDate,jdbcType=DATE}, #{faceUrl,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{createUserId,jdbcType=INTEGER}, 
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{passwordChangeNext,jdbcType=INTEGER},
+      #{locked,jdbcType=INTEGER}, #{lockedDate,jdbcType=DATE}, #{faceUrl,jdbcType=VARCHAR},
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{createUserId,jdbcType=INTEGER},
       #{updateUserId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="top.annwz.base.entity.BaUser">
@@ -185,21 +185,4 @@
       update_user_id = #{updateUserId,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <select id="gets" parameterType="PageParameter" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from BA_USER
-    where ${where} order by ${sort}
-  </select>
-  <select id="getsByMap" parameterType="java.util.HashMap" resultMap="BaseResultMap" >
-    select <include refid="Base_Column_List" /> from BA_USER
-    where 1=1
-    <foreach collection="map.keys" item="_itemKey">
-      <!-- _itemKey这里要写的复杂一点，不然会在#{} ${}里被解析掉-->
-      <if test="null != map[_itemKey]">
-        and ${_itemKey} = #{map[${_itemKey}]}
-      </if>
-    </foreach>
-    order by create_time desc
-  </select>
 </mapper>
