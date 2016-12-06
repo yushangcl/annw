@@ -9,13 +9,13 @@ import java.util.List;
  * 持久层基本的接口定义 所有的DAO接口都必须继承该接口
  */
 public interface IBasicDao<T> {
-    int delete(Long orderUkid);
+    int deleteByPrimaryKey(Long orderUkid);
 
     int insert(T record);
 
-    T get(Long ukid);
+    T selectByPrimaryKey(Long ukid);
 
-    int update(T record);
+    int updateByPrimaryKey(T record);
 
     List<T> getsByMap(@Param("map") HashMap params);
 

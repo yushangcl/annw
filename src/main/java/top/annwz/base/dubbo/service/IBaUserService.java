@@ -5,6 +5,6 @@ import top.annwz.base.entity.BaUser;
 /**
  * Created by Wuhuahui on 2016/12/4.
  */
-public interface IBaUserService {
+public interface IBaUserService extends IBasicService<BaUser>{
 	public BaUser getUser(Long userId);
 }

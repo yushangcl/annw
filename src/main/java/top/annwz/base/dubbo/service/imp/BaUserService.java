@@ -12,12 +12,20 @@ import javax.annotation.Resource;
  * Created by Wuhuahui on 2016/12/4.
  */
 @Service
-public class BaUserService  implements IBaUserService {
+public class BaUserService extends BasicService<BaUser> implements IBaUserService {
 
 	@Resource
 	private BaUserMapper baUserMapper;
+
+	@Override
+	public IBasicDao<BaUser> getDao() {
+		return baUserMapper;
+	}
+
 	@Override
 	public BaUser getUser(Long userId) {
-		return baUserMapper.get(userId);
+		return baUserMapper.selectByPrimaryKey(userId);
 	}
+
+
 }

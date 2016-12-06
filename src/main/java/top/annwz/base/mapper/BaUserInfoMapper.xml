@@ -103,4 +103,25 @@
       signature = #{signature,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  <select id="getsByMap" parameterType="java.util.HashMap" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from ba_user
+    where 1=1
+    <foreach collection="map.keys" item="_itemKey" open=""  separator="">
+      <if test="null != map[_itemKey]">
+        and ${_itemKey} = #{map[${_itemKey}]}
+      </if>
+    </foreach>
+  </select>
+  <select id="getCountByMap" parameterType="java.util.HashMap" resultType="java.lang.Integer" >
+    select count(1)
+    from ba_user
+    where 1=1
+    <foreach collection="map.keys" item="_itemKey" open=""  separator="">
+      <if test="null != map[_itemKey]">
+        and ${_itemKey} = #{map[${_itemKey}]}
+      </if>
+    </foreach>
+  </select>
 </mapper>

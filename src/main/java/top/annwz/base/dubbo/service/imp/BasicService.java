@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import top.annwz.base.Dao.IBasicDao;
+import top.annwz.base.dubbo.service.IBasicService;
 import top.annwz.base.exception.ServiceException;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public abstract class BasicService<T> {
+public abstract class BasicService<T>  {
     protected transient final Logger logger = LogManager.getLogger(getClass());
 
     public abstract IBasicDao<T> getDao();
@@ -23,7 +24,7 @@ public abstract class BasicService<T> {
     @Transactional(propagation = Propagation.REQUIRED)
     public int delete(Long ukid) {
         try {
-            return getDao().delete(ukid);
+            return getDao().deleteByPrimaryKey(ukid);
         } catch (Exception e) {
             throw new ServiceException(e);
         }
@@ -41,7 +42,7 @@ public abstract class BasicService<T> {
     @Transactional(propagation = Propagation.REQUIRED)
     public int update(T record) {
         try {
-            return getDao().update(record);
+            return getDao().updateByPrimaryKey(record);
         } catch (Exception e) {
             throw new ServiceException(e);
         }
@@ -49,7 +50,7 @@ public abstract class BasicService<T> {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public T get(Long ukid) {
-        return getDao().get(ukid);
+        return getDao().selectByPrimaryKey(ukid);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
