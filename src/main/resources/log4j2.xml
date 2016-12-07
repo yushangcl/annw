@@ -4,7 +4,7 @@
 		<!-- 基本的文件的输出信息的配置 -->
 		<property name="LOG_HOME">../logs</property>
 		<!-- 日志备份目录 -->
-		<property name="SERVER_NAME">basicaccess</property>
+		<property name="SERVER_NAME">annw</property>
 		<property name="BACKUP_HOME">{LOG_HOME}/${SERVER_NAME}</property>
 		<property name="STAT_NAME">stat</property>
 	</properties>

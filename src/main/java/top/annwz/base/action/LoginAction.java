@@ -9,11 +9,13 @@ import top.annwz.base.entity.BaUser;
 import top.annwz.base.uitl.AbsResponse;
 import top.annwz.base.uitl.Converter;
 import top.annwz.base.uitl.ReqUtil;
+import top.annwz.base.uitl.SpringContextHolder;
 
 import javax.annotation.Resource;
 import javax.xml.ws.Response;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.UUID;
 
 /**
  * Created by Wuhuahui on 2016/12/5.
@@ -30,10 +32,13 @@ public class LoginAction extends BasicAction {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String userId = Converter.getString(params, "userId");
 		BaUser baUser = baUserService.getUser(Long.valueOf(userId));
-		logger.debug("登录" + userId);
-		map.put("userId", baUser);
+		String ukid = UUID.randomUUID().toString();
+		logger.debug("登录" + ukid);
+		map.put("userId", ukid);
 		ReqUtil.setErrAbs(abs, 1001 , "error");
+		map.put("bean",SpringContextHolder.getBean(this.getClass()));
 		abs.setData(map);
+
 		return abs;
 	}
 }
