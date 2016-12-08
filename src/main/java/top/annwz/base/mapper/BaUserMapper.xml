@@ -38,8 +38,8 @@
       update_user_id)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{passwordChangeNext,jdbcType=INTEGER},
-      #{locked,jdbcType=INTEGER}, #{lockedDate,jdbcType=DATE}, #{faceUrl,jdbcType=VARCHAR},
-      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{createUserId,jdbcType=INTEGER},
+      #{locked,jdbcType=INTEGER}, sysdate(), #{faceUrl,jdbcType=VARCHAR},
+      sysdate(), sysdate(), #{createUserId,jdbcType=INTEGER},
       #{updateUserId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="top.annwz.base.entity.BaUser">
@@ -154,14 +154,8 @@
       <if test="faceUrl != null">
         face_url = #{faceUrl,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=DATE},
-      </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=DATE},
-      </if>
-      <if test="createUserId != null">
-        create_user_id = #{createUserId,jdbcType=INTEGER},
       </if>
       <if test="updateUserId != null">
         update_user_id = #{updateUserId,jdbcType=INTEGER},
@@ -179,9 +173,7 @@
       locked = #{locked,jdbcType=INTEGER},
       locked_date = #{lockedDate,jdbcType=DATE},
       face_url = #{faceUrl,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE},
-      create_user_id = #{createUserId,jdbcType=INTEGER},
       update_user_id = #{updateUserId,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>

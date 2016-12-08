@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaUser;
-import top.annwz.base.uitl.AbsResponse;
-import top.annwz.base.uitl.Converter;
-import top.annwz.base.uitl.ReqUtil;
-import top.annwz.base.uitl.SpringContextHolder;
+import top.annwz.base.uitl.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -27,12 +24,12 @@ public class LoginAction extends BasicAction {
 	@Resource
 	IBaUserService baUserService;
 	@RequestMapping("/login")
-	public AbsResponse<HashMap<String, Object>> initLogin(@RequestBody HashMap<String, Object> params) {
+	public AbsResponse<HashMap<String, Object>> initLogin(@RequestBody HashMap<String, Object> params) throws Exception{
 		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
 		HashMap<String, Object> map = new HashMap <String, Object>();
 		String userId = Converter.getString(params, "userId");
 		BaUser baUser = baUserService.getUser(Long.valueOf(userId));
-
+		map.put("password", EncryptUtil.decrypt(baUser.getPassword()));//对密码进行加密
 		map.put("userId", userId);
 		map.put("user", baUser);
 		abs.setData(map);
