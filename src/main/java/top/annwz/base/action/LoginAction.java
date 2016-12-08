@@ -32,11 +32,12 @@ public class LoginAction extends BasicAction {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String userId = Converter.getString(params, "userId");
 		BaUser baUser = baUserService.getUser(Long.valueOf(userId));
-		String ukid = UUID.randomUUID().toString();
+		String ukid = UUID.randomUUID().toString(); //获取唯一的ukid
 		logger.debug("登录" + ukid);
 		map.put("userId", ukid);
-		ReqUtil.setErrAbs(abs, 1001 , "error");
-		map.put("bean",SpringContextHolder.getBean(this.getClass()));
+//		ReqUtil.setErrAbs(abs, 1001 , "error");
+//		map.put("bean",SpringContextHolder.getBean(this.getClass()));
+		map.put("user", baUser);
 		abs.setData(map);
 
 		return abs;

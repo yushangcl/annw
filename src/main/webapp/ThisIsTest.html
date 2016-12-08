@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function test(){
+        $.ajax({
+            "url":"showIncomeClass1.do?class="+$("#income_select_1").val(),
+            "type":"post",
+            "dataType":"json",
+            "success":function(data){
+                /*
+                 data是服务器返回的数据
+                 如果是json字符串，会自动转换成js对象。
+                 */
+                $("#income_select_2").empty();
+                for(i = 0; i < data.inc.length; i++){
+                    var s = data.inc[i];
+                    $("#income_select_2").append(
+                            "<option id=income_select_+"+s.incomeClass +"value="+s.incomeValue +">"+ s.incomeName+"</option>"
+                    )
+                }
+            },
+            "error":function(){
+
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
