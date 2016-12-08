@@ -1,7 +1,7 @@
 package top.annwz.base.dubbo.service.imp;
 
 import org.springframework.stereotype.Service;
-import top.annwz.base.Dao.IBasicDao;
+import top.annwz.base.dao.IBasicDao;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaUser;
 import top.annwz.base.mapper.BaUserMapper;

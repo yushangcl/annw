@@ -1,4 +1,4 @@
-package top.annwz.base.Dao;
+package top.annwz.base.dao;
 
 import org.apache.ibatis.annotations.Param;
 

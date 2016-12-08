@@ -5,8 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import top.annwz.base.Dao.IBasicDao;
-import top.annwz.base.dubbo.service.IBasicService;
+import top.annwz.base.dao.IBasicDao;
 import top.annwz.base.exception.ServiceException;
 
 import java.util.HashMap;

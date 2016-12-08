@@ -1,6 +1,6 @@
 package top.annwz.base.mapper;
 
-import top.annwz.base.Dao.IBasicDao;
+import top.annwz.base.dao.IBasicDao;
 import top.annwz.base.entity.BaUserInfo;
 
 public interface BaUserInfoMapper extends IBasicDao<BaUserInfo> {
