@@ -9,6 +9,35 @@
   </welcome-file-list>
 
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <servlet-class>top.annwz.base.servlet.UploadFileServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UploadFileServlet</servlet-name>
+    <url-pattern>/servlet/UploadFileServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ListFileServlet</servlet-name>
+    <servlet-class>top.annwz.base.servlet.ListFileServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ListFileServlet</servlet-name>
+    <url-pattern>/servlet/ListFileServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DownLoadFileServlet</servlet-name>
+    <servlet-class>top.annwz.base.servlet.DownLoadFileServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DownLoadFileServlet</servlet-name>
+    <url-pattern>/servlet/DownLoadFileServlet</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>springmvc</servlet-name>
@@ -56,4 +85,6 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+
 </web-app>

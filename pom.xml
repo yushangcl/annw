@@ -126,6 +126,11 @@
       <artifactId>mybatis</artifactId>
       <version>3.2.1</version>
     </dependency>
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>xyz.annw</finalName>
