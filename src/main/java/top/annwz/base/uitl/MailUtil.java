@@ -10,6 +10,7 @@ import top.annwz.base.entity.Mail;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 public class MailUtil {
@@ -21,7 +22,7 @@ public class MailUtil {
 	private static String KEY_PROPS = "mail.smtp.auth";
 	private static String KEY_STARTTLS = "mail.smtp.starttls.enable";
 
-	public String sendEmail(final Mail mail) {
+	public static String sendEmail(final Mail mail) {
 
 		Properties props = new Properties();
 		props.put(KEY_PROPS, "true");
@@ -41,8 +42,14 @@ public class MailUtil {
 			// Create a default MimeMessage object.
 			Message message = new MimeMessage(session);
 
+			String nick="";
+			try {
+				nick=javax.mail.internet.MimeUtility.encodeText("Lazy Technology");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(mail.getSender()));
+			message.setFrom(new InternetAddress(nick+" <"+mail.getSender()+">"));
 
 			// Set To: header field of the header.
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getReceiver()));
@@ -51,7 +58,7 @@ public class MailUtil {
 			message.setSubject(mail.getSubject());
 
 			// Now set the actual message
-			message.setContent(mail.getMessage(), "text/html;charset=gbk"); //发送HTML邮件，内容样式比较丰富
+			message.setContent(mail.getMessage(), "text/html;charset=utf-8"); //发送HTML邮件，内容样式比较丰富
 
 			message.setSentDate(mail.getDate());//设置发信时间
 
@@ -62,10 +69,12 @@ public class MailUtil {
 
 
 		} catch (MessagingException e) {
+
 			throw new RuntimeException(e);
 		}
 		return "success";
 	}
+
 
 
 }

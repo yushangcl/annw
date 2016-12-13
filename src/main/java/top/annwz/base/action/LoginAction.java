@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 @Controller
 @ResponseBody
-@RequestMapping("/login")
+@RequestMapping("/api")
 public class LoginAction extends BasicAction {
 	@Resource
 	IBaUserService baUserService;

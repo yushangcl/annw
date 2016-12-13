@@ -533,54 +533,16 @@ public abstract class StringUtils {
         b = b.setScale(scale, BigDecimal.ROUND_HALF_UP);
         return b.doubleValue();
     }
-
-    /**
-     * @author wujiapeng
-     * 对平台账号platformAccount进行加密
-     * 23465789456123 => 1233*********123
-     */
-    public static String fakePlatformAccount(String platformAccount){
-    	if(platformAccount == null || platformAccount.isEmpty()) return platformAccount;
-    	String fakeVal = "";
-    	int iSeq = 0 ;
-    	for(int i = 0;i<platformAccount.length();i++){
-    		//不需要判断指定字符是否是一个数字。
-//    		if(!Character.isDigit(platformAccount.charAt(i))){
-//    			continue;
-//    		}
-    		iSeq++;
-    		fakeVal += (iSeq > 3 && iSeq <=12 ) ? "*":platformAccount.charAt(i);
-    	}
-    	return fakeVal;
+    public static String getRandomString(int length) { //length表示生成字符串的长度
+        String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
