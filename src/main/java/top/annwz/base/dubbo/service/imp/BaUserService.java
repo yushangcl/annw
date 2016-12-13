@@ -7,6 +7,8 @@ import top.annwz.base.entity.BaUser;
 import top.annwz.base.mapper.BaUserMapper;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Wuhuahui on 2016/12/4.
@@ -27,5 +29,16 @@ public class BaUserService extends BasicService<BaUser> implements IBaUserServic
 		return baUserMapper.selectByPrimaryKey(userId);
 	}
 
+	@Override
+	public int verifyPassword(String userName, String password) {
+		HashMap map = new HashMap();
+		map.put("user_name", userName);
+		map.put("password", password);
+		return baUserMapper.getCountByMap(map);
+	}
 
+	@Override
+	public BaUser getByEmail(String email) {
+		return baUserMapper.getByEmail(email);
+	}
 }

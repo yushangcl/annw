@@ -29,6 +29,8 @@ public class BaUser {
 
     private Integer updateUserId;
 
+    private Integer emailStatus;
+
     public Integer getUserId() {
         return userId;
     }
@@ -131,5 +133,14 @@ public class BaUser {
 
     public void setUpdateUserId(Integer updateUserId) {
         this.updateUserId = updateUserId;
+    }
+
+
+    public Integer getEmailStatus() {
+        return emailStatus;
+    }
+
+    public void setEmailStatus(Integer emailStatus) {
+        this.emailStatus = emailStatus;
     }
 }

@@ -149,4 +149,8 @@ public class ReqUtil {
 		return abs.setResult(code, message);
 	}
 
+	public static AbsResponse<?> setSucAbs(AbsResponse<?> abs, int code, String message) {
+		return abs.setResult(code, message);
+	}
+
 }

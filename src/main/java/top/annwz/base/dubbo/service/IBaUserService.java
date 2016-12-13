@@ -7,4 +7,8 @@ import top.annwz.base.entity.BaUser;
  */
 public interface IBaUserService extends IBasicService<BaUser>{
 	public BaUser getUser(Long userId);
+
+	public int verifyPassword(String userName, String password);
+
+	public BaUser getByEmail(String email);
 }
