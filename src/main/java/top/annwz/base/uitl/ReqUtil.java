@@ -145,12 +145,12 @@ public class ReqUtil {
 		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}
 
-	public static AbsResponse<?> setErrAbs(AbsResponse<?> abs, int code, String message) {
-		return abs.setResult(code, message);
+	public static AbsResponse<?> setErrAbs(AbsResponse<?> abs, String message) {
+		return abs.setResult(1, message);
 	}
 
-	public static AbsResponse<?> setSucAbs(AbsResponse<?> abs, int code, String message) {
-		return abs.setResult(code, message);
+	public static AbsResponse<?> setSucAbs(AbsResponse<?> abs, String message) {
+		return abs.setResult(0, message);
 	}
 
 }

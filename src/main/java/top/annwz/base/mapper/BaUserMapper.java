@@ -17,4 +17,6 @@ public interface BaUserMapper extends IBasicDao<BaUser> {
     int updateByPrimaryKey(BaUser record);
 
     BaUser getByEmail(String email);
+
+    int updateStatusByEmail(String email);
 }

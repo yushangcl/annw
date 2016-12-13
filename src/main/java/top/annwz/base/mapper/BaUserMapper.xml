@@ -215,4 +215,10 @@
     from ba_user
     where email = #{email}
   </select>
+  <update id="updateStatusByEmail">
+    update ba_user
+    set  email_status = 1,
+        update_time = sysdate()
+    where email = #{email}
+  </update>
 </mapper>

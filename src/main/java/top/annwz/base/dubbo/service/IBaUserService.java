@@ -11,4 +11,6 @@ public interface IBaUserService extends IBasicService<BaUser>{
 	public int verifyPassword(String userName, String password);
 
 	public BaUser getByEmail(String email);
+
+	public int updateStatusByEmail(String email);
 }

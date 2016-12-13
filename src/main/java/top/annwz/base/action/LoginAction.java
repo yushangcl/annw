@@ -50,30 +50,30 @@ public class LoginAction extends BasicAction {
 		String email = Converter.getString(params, "email");
 		try {
 			if (email == null || password == null) {
-				ReqUtil.setErrAbs(abs, 1, "参数缺失");
+				ReqUtil.setErrAbs(abs, "参数缺失");
 				return abs;
 			}
 			BaUser baUser = baUserService.getByEmail(email);
 			if (baUser == null) {
-				ReqUtil.setErrAbs(abs, 1, "用户不存在");
+				ReqUtil.setErrAbs(abs, "用户不存在");
 				return abs;
 			}
 			if (baUser.getEmailStatus() == null || baUser.getEmailStatus() == 0) {
-				ReqUtil.setErrAbs(abs, 1, "邮箱未激活");
+				ReqUtil.setErrAbs(abs,"邮箱未激活");
 				return abs;
 			}
 
 			password = EncryptUtil.encrypt(password);
 
 			if (password.equals(baUser.getPassword())) {
-				ReqUtil.setSucAbs(abs, 0, "登陆成功");
+				ReqUtil.setSucAbs(abs, "登陆成功");
 				map.put("userName", baUser.getUserName());
 				map.put("email", baUser.getEmail());
 				map.put("faceUrl", baUser.getFaceUrl());
 				abs.setData(map);
 				logger.info("登录成功: userId=" + baUser.getUserId());
 			} else {
-				ReqUtil.setErrAbs(abs, 1, "用户名或密码错误");
+				ReqUtil.setErrAbs(abs, "用户名或密码错误");
 			}
 		} catch (Exception e) {
 			logger.error("登录异常：" + email);

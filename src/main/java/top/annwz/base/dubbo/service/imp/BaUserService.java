@@ -41,4 +41,9 @@ public class BaUserService extends BasicService<BaUser> implements IBaUserServic
 	public BaUser getByEmail(String email) {
 		return baUserMapper.getByEmail(email);
 	}
+
+	@Override
+	public int updateStatusByEmail(String email) {
+		return baUserMapper.updateStatusByEmail(email);
+	}
 }

@@ -44,7 +44,7 @@ public class RegisteredAction extends BasicAction {
 		String mobile = Converter.getString(params, "mobile");
 		String email = Converter.getString(params, "email");
 		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password) || StringUtils.isEmpty(mobile) || StringUtils.isEmpty(email)) {
-			ReqUtil.setErrAbs(abs, 1, "参数缺失");
+			ReqUtil.setErrAbs(abs, "参数缺失");
 			return abs;
 		}
 		BaUser baUser = new BaUser();
@@ -56,7 +56,7 @@ public class RegisteredAction extends BasicAction {
 			baUser.setEmail(email);
 			baUser.setEmailStatus(0);
 			userService.insert(baUser);
-			ReqUtil.setErrAbs(abs, 0, "success");
+			ReqUtil.setSucAbs(abs, "success");
 			String code = StringUtils.getRandomString(40);
 			BaCode baCode = new BaCode();
 			baCode.setEmail(email);
@@ -97,16 +97,26 @@ public class RegisteredAction extends BasicAction {
 		String codeValue = request.getParameter("code");
 		BaCode baCode = baCodeService.getByCodeValue(codeValue);
 		if (baCode == null) {
-			ReqUtil.setErrAbs(abs, 1, "验证链接失效");
+			ReqUtil.setErrAbs(abs, "验证链接失效");
 			return abs;
 		}
+		if (baCode.getCodeStatus() == null || baCode.getCodeStatus() != 0) {
+			ReqUtil.setErrAbs(abs, "邮箱已激活");
+			return abs;
+		}
+		String email = baCode.getEmail();
 		Integer id = baCode.getCodeId();
 		baCode = new BaCode();
 		baCode.setCodeId(id);
 		baCode.setCodeStatus(1);
-		baCodeService.updateByPrimaryKeySelective(baCode);
-		ReqUtil.setSucAbs(abs, 0, "验证成功");
+		int co = baCodeService.updateByPrimaryKeySelective(baCode);
 		//todo 将用户的状态改为 激活
+		int count = userService.updateStatusByEmail(email);
+		if (co != 1 || count != 1) {
+			ReqUtil.setErrAbs(abs, "激活失败");
+			return abs;
+		}
+		ReqUtil.setSucAbs(abs,"邮箱验证成功");
 		return abs;
 	}
 
