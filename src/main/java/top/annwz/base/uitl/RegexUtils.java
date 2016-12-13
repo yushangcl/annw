@@ -162,6 +162,41 @@ public class RegexUtils {
     public static boolean checkIpAddress(String ipAddress) { 
         String regex = "[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))"; 
         return Pattern.matches(regex, ipAddress); 
-    } 
+    }
+
+    /**
+     * 验证输入密码条件(字符与数字同时出现)
+     *
+     * @param str 待验证的字符串
+     * @return 如果是符合格式的字符串,返回 true ,否则为 false
+     */
+    public static boolean IsPassword(String str) {
+        String regex = "[A-Za-z]+[0-9]";
+        return Pattern.matches(regex, str);
+
+    }
+        /**
+		 * 验证输入密码长度 (6-18位)
+		 *
+		 * @param str 待验证的字符串
+		 * @return 如果是符合格式的字符串,返回 true ,否则为 false
+		 */
+    public static boolean IsPasswLength(String str) {
+        String regex = "^\\d{6,18}$";
+        return Pattern.matches(regex, str);
+    }
+
+    /**
+     * @param regex
+     * 正则表达式字符串
+     * @param str
+     * 要匹配的字符串
+     * @return 如果str 符合 regex的正则表达式格式,返回true, 否则返回 false;
+     */
+    private static boolean match(String regex, String str) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
      
 }

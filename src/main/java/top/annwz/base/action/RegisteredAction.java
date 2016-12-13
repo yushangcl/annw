@@ -31,12 +31,25 @@ public class RegisteredAction extends BasicAction {
 	@Resource
 	private IBaCodeService baCodeService;
 
-	//TODO 以后写在配置文件中
-//	private static final String sender = "1941247390@qq.com";
-//	private static final String password = "WHH88913HH233123..";
-//	private static final String host = "smtp.qq.com";
-//	private static final String url = "http://an.annwz.top/annw/api/verify";
-
+	/*
+	 * @ApiMethod:true
+	 *
+	 * @ApiMethodName:注册
+	 * @ApiRequestParamsDes:
+	 * |userName|必须|String|username|用户名|
+	 * |password|必须|String|123456|密码|
+	 * |mobile|必须|String|12345678900|手机号码|
+	 * |email|必须|String|123456@qq.com|邮箱地址|
+	 *
+	 * @ApiRequestParams: {"userName" : "username", "password" : "123456", "mobile" : "12345678900", "email" : "123456@qq.com"}
+	 *
+	 * @ApiResponse:
+	 * 成功返回: {"code":0,"msg":"","data":""}
+	 *
+	 * 失败返回:{"code":1,"msg":"异常","data":""}
+	 *
+	 * @ApiMethodEnd
+	 */
 	@RequestMapping("/registered")
 	public AbsResponse<HashMap<String, Object>> register(@RequestBody HashMap<String, Object> params) {
 		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
@@ -46,6 +59,24 @@ public class RegisteredAction extends BasicAction {
 		String email = Converter.getString(params, "email");
 		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password) || StringUtils.isEmpty(mobile) || StringUtils.isEmpty(email)) {
 			ReqUtil.setErrAbs(abs, "参数缺失");
+			return abs;
+		}
+		//验证邮箱
+		if (!RegexUtils.checkEmail(email)) {
+			ReqUtil.setErrAbs(abs, "邮箱格式错误");
+			return abs;
+		}
+		//验证手机号码
+		if (!RegexUtils.checkMobile(mobile)) {
+			ReqUtil.setErrAbs(abs, "手机号码格式错误");
+			return abs;
+		}
+
+		//验证用户名
+
+		//验证密码
+		if (RegexUtils.IsPassword(password) || RegexUtils.IsPasswLength(password)) {
+			ReqUtil.setErrAbs(abs, "密码格式不正确");
 			return abs;
 		}
 		BaUser baUser = userService.getByEmail(email);
@@ -78,6 +109,21 @@ public class RegisteredAction extends BasicAction {
 		return abs;
 	}
 
+	/*
+	 * @ApiMethod:true
+	 *
+	 * @ApiMethodName:验证邮箱地址
+	 * @ApiRequestParamsDes:
+	 *
+	 * @ApiRequestParams: code=rpsxMiiPkYmcTfgK23zoltJ5Ro5zA2gJ1enkdSsM
+	 *
+	 * @ApiResponse:
+	 * 成功返回: {"code":0,"msg":"","data":""}
+	 *
+	 * 失败返回:{"code":1,"msg":"异常","data":""}
+	 *
+	 * @ApiMethodEnd
+	 */
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
 	public AbsResponse<HashMap<String, Object>> verifyEmail(HttpServletRequest request) {
 		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
