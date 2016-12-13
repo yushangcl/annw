@@ -1,5 +1,6 @@
 package top.annwz.base.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import top.annwz.base.dao.IBasicDao;
 import top.annwz.base.entity.BaCode;
 
@@ -17,4 +18,6 @@ public interface BaCodeMapper extends IBasicDao<BaCode> {
     int updateByPrimaryKey(BaCode record);
 
     BaCode getByCodeValue(String codeValue);
+
+    int updateCodeStatus(String codeValue );
 }

@@ -8,7 +8,7 @@ import top.annwz.base.entity.BaCode;
 public interface IBaCodeService extends IBasicService<BaCode>{
 	public BaCode getByCodeValue(String codeValue);
 
-	public int updateByPrimaryKeySelective(BaCode baCode);
+	public int updateCodeStatus(String codeValue);
 
 
 }

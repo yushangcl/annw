@@ -26,7 +26,7 @@ public class BaCodeService extends BasicService<BaCode> implements IBaCodeServic
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(BaCode baCode) {
-		return baCodeMapper.updateByPrimaryKeySelective(baCode);
+	public int updateCodeStatus(String codeValue) {
+		return baCodeMapper.updateCodeStatus(codeValue);
 	}
 }

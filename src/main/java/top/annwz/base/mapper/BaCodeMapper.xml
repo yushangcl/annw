@@ -137,4 +137,10 @@
     from ba_code
     where code_value = #{CodeValue}
   </select>
+  <update id="updateCodeStatus">
+     update ba_code
+     SET  finish_time = sysdate(),
+           code_status = 1
+    WHERE  code_value = #{codeValue}
+  </update>
 </mapper>
