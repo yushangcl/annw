@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaUser;
@@ -19,11 +20,11 @@ import java.util.UUID;
  */
 @Controller
 @ResponseBody
-@RequestMapping("/api")
+@RequestMapping("/login" )
 public class LoginAction extends BasicAction {
 	@Resource
 	IBaUserService baUserService;
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public AbsResponse<HashMap<String, Object>> initLogin(@RequestBody HashMap<String, Object> params) throws Exception{
 		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
 		HashMap<String, Object> map = new HashMap <String, Object>();

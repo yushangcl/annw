@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+
+    $(function () {
+        $("#test").click(test);
+    })
+    function ajax(url, data, type) {
+        $.ajax( {
+            url : 'http://localhost:8060/login/login',
+            type: 'POST', //HTTP请求类型
+            data:JSON.stringify(GetJsonData()),
+            dataType: 'json', //服务器返回json格式数据
+            async: false,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            timeout: 10000, //超时时间设置为10秒；
+            success: function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                var code = data.code;
+                var msg = data.msg;
+                var datas = JSON.stringify(data.data);
+                alert(datas)
+
+            },
+            error:function(){
+
+            }
+        });
+        
+        function GetJsonData() {
+            var json = {
+                "userId":"123456"
+            }
+           return json;
+        }
+    }
+</script>
+<body>
+    <div>
+        <li class="test" id="test"> <button>测试</button></li>
+    </div>
+</body>
+</html>
