@@ -47,7 +47,12 @@ public class RegisteredAction extends BasicAction {
 			ReqUtil.setErrAbs(abs, "参数缺失");
 			return abs;
 		}
-		BaUser baUser = new BaUser();
+		BaUser baUser = userService.getByEmail(email);
+		if (baUser != null ) {
+			ReqUtil.setErrAbs(abs, "该邮箱已被注册");
+			return abs;
+		}
+		baUser = new BaUser();
 		try {
 			baUser.setUserName(userName);
 			//进行EncryptUtil.decrypt();
