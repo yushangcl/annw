@@ -14,7 +14,6 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  * Created by Wuhuahui on 2016/12/5.

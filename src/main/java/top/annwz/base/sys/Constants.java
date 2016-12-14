@@ -7,7 +7,8 @@ import java.util.ResourceBundle;
  */
 public class Constants {
 	public static final ResourceBundle rbn = ResourceBundle.getBundle("service-config");
-	//邮件服务
+
+	//email
 	public final static String EMAIL_HOST = rbn.getString("email.host");
 	public final static String EMAIL_SENDER = rbn.getString("email.sender");
 	public final static String EMAIL_USERNAME = rbn.getString("email.username");
@@ -16,5 +17,8 @@ public class Constants {
 
 	//token
 	public final  static String TOKEN_KEY = rbn.getString("token.key");
+
+	//faceUrl
+	public final static String USER_FACEURL = rbn.getString("user.faceUrl");
 
 }

@@ -90,11 +90,16 @@ public class RegisteredAction extends BasicAction {
 			baUser.setMobile(mobile);
 			baUser.setEmail(email);
 			baUser.setEmailStatus(0);
+			baUser.setFaceUrl(Constants.USER_FACEURL);//注册的时候默认该头像
 			bauserService.insert(baUser);
 			ReqUtil.setSucAbs(abs, "success");
 			// 验证邮箱信息
 			String code = generateCode(email);
-			sendEmail(email, userName, code);//发送验证邮箱 邮件
+			boolean isSend = sendEmail(email, userName, code);//发送验证邮箱 邮件
+			if (!isSend) {
+				ReqUtil.setErrAbs(abs, "邮件发送失败");
+				return abs;
+			}
 		} catch (Exception e) {
 			logger.error("注册失败：" + baUser);
 		}
@@ -144,7 +149,7 @@ public class RegisteredAction extends BasicAction {
 	 * @param email
 	 * @param userName
 	 * @param code
-	 * @return
+	 * @return 发送成功返回true 失败返回false
 	 */
 	private boolean sendEmail(String email, String userName, String code) {
 		Mail mail = new Mail();
@@ -161,6 +166,7 @@ public class RegisteredAction extends BasicAction {
 			MailUtil.sendEmail(mail);
 		} catch (Exception e) {
 			logger.error("发送邮件失败：" + email);
+			return false;
 		}
 		return true;
 	}
@@ -168,7 +174,7 @@ public class RegisteredAction extends BasicAction {
 	/**
 	 * 生成 邮箱验证code
 	 * @param email
-	 * @return
+	 * @return code
 	 */
 	private String generateCode(String email) {
 		String code = StringUtils.getRandomString(40);
