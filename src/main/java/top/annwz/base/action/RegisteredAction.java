@@ -1,5 +1,6 @@
 package top.annwz.base.action;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,21 +88,14 @@ public class RegisteredAction extends BasicAction {
 		baUser = new BaUser();
 		try {
 			baUser.setUserName(userName);
-			//进行EncryptUtil.decrypt();
-			baUser.setPassword(EncryptUtil.encrypt(password));
+			baUser.setPassword(EncryptUtil.encrypt(password));//进行EncryptUtil.decrypt();
 			baUser.setMobile(mobile);
 			baUser.setEmail(email);
 			baUser.setEmailStatus(0);
 			userService.insert(baUser);
-			// 验证邮箱信息
 			ReqUtil.setSucAbs(abs, "success");
-			String code = StringUtils.getRandomString(40);
-			BaCode baCode = new BaCode();
-			baCode.setEmail(email);
-			baCode.setCodeStatus(0);
-			baCode.setCodeType("registered");
-			baCode.setCodeValue(code);
-			baCodeService.insert(baCode);
+			// 验证邮箱信息
+			String code = generateCode(email);
 			sendEmail(email, userName, code);//发送验证邮箱 邮件
 		} catch (Exception e) {
 			logger.error("注册失败：" + baUser);
@@ -148,6 +142,13 @@ public class RegisteredAction extends BasicAction {
 		return abs;
 	}
 
+	/**
+	 * 发送邮件
+	 * @param email
+	 * @param userName
+	 * @param code
+	 * @return
+	 */
 	private boolean sendEmail(String email, String userName, String code) {
 		Mail mail = new Mail();
 		try {
@@ -166,6 +167,23 @@ public class RegisteredAction extends BasicAction {
 		}
 		return true;
 	}
+
+	/**
+	 * 生成 邮箱验证code
+	 * @param email
+	 * @return
+	 */
+	private String generateCode(String email) {
+		String code = StringUtils.getRandomString(40);
+		BaCode baCode = new BaCode();
+		baCode.setEmail(email);
+		baCode.setCodeStatus(0);
+		baCode.setCodeType("registered");
+		baCode.setCodeValue(code);
+		baCodeService.insert(baCode);
+		return code;
+	}
+
 
 }
 

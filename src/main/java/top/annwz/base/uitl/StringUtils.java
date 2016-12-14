@@ -1,5 +1,7 @@
 package top.annwz.base.uitl;
 
+import org.apache.commons.lang.RandomStringUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -533,6 +535,12 @@ public abstract class StringUtils {
         b = b.setScale(scale, BigDecimal.ROUND_HALF_UP);
         return b.doubleValue();
     }
+
+    /**
+     * 生成自定义长度的字母和数字组合
+     * @param length
+     * @return
+     */
     public static String getRandomString(int length) { //length表示生成字符串的长度
         String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
@@ -542,6 +550,15 @@ public abstract class StringUtils {
             sb.append(base.charAt(number));
         }
         return sb.toString();
+    }
+
+    /**
+     *  生成自定义长度的字母和数字组合（使用RandomStringUtils）
+     * @param length
+     * @return
+     */
+    public static String getRandomStr(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);
     }
     
 }
