@@ -1,6 +1,5 @@
 package top.annwz.base.action;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,12 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaUser;
+import top.annwz.base.sys.Constants;
 import top.annwz.base.uitl.*;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * Created by Wuhuahui on 2016/12/5.
@@ -72,6 +73,8 @@ public class LoginAction extends BasicAction {
 				map.put("faceUrl", baUser.getFaceUrl());
 				abs.setData(map);
 				logger.info("登录成功: userId=" + baUser.getUserId());
+				//token
+
 			} else {
 				ReqUtil.setErrAbs(abs, "用户名或密码错误");
 			}
@@ -80,5 +83,13 @@ public class LoginAction extends BasicAction {
 		}
 		return abs;
 	}
+
+	private String getToken(Long userId) throws IOException {
+		String time = DateUtil.toDateTimeString(new Date());
+		String data = Constants.TOKEN_KEY + userId + time;
+		return EncryptUtil.getMD5(data, "utf-8", true);
+	}
+
+
 
 }

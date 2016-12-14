@@ -1,6 +1,5 @@
 package top.annwz.base.action;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import top.annwz.base.uitl.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -27,7 +25,7 @@ import java.util.HashMap;
 @RequestMapping("/api")
 public class RegisteredAction extends BasicAction {
 	@Resource
-	private IBaUserService userService;
+	private IBaUserService bauserService;
 
 	@Resource
 	private IBaCodeService baCodeService;
@@ -80,7 +78,7 @@ public class RegisteredAction extends BasicAction {
 			ReqUtil.setErrAbs(abs, "密码格式不正确");
 			return abs;
 		}
-		BaUser baUser = userService.getByEmail(email);
+		BaUser baUser = bauserService.getByEmail(email);
 		if (baUser != null ) {
 			ReqUtil.setErrAbs(abs, "该邮箱已被注册");
 			return abs;
@@ -92,7 +90,7 @@ public class RegisteredAction extends BasicAction {
 			baUser.setMobile(mobile);
 			baUser.setEmail(email);
 			baUser.setEmailStatus(0);
-			userService.insert(baUser);
+			bauserService.insert(baUser);
 			ReqUtil.setSucAbs(abs, "success");
 			// 验证邮箱信息
 			String code = generateCode(email);
@@ -132,8 +130,7 @@ public class RegisteredAction extends BasicAction {
 			return abs;
 		}
 		int co = baCodeService.updateCodeStatus(codeValue);
-		//todo 将用户的状态改为 激活
-		int count = userService.updateStatusByEmail(baCode.getEmail());
+		int count = bauserService.updateStatusByEmail(baCode.getEmail());
 		if (co != 1 || count != 1) {
 			ReqUtil.setErrAbs(abs, "激活失败");
 			return abs;

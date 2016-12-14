@@ -2,6 +2,7 @@ package top.annwz.base.uitl;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -9,6 +10,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
+import static org.apache.commons.codec.digest.MessageDigestAlgorithms.MD5;
 
 /**
  * 功能描述
@@ -74,8 +77,6 @@ public class EncryptUtil {
 	 * 解密方法
 	 *
 	 *
-	 *
-	 *
 	 * @param xmlStr
 	 *            需要解密的消息字符串
 	 * @return 解密后的字符串
@@ -132,10 +133,7 @@ public class EncryptUtil {
 	 * 方法名称:TripleDES_CBC_Encrypt
 	 * 功能描述:
 	 *
-	 *
 	 * 经过封装的三重DES/CBC加密算法，如果包含中文，请注意编码。
-	 *
-	 *
 	 *
 	 *
 	 * @param sourceBuf
@@ -165,10 +163,7 @@ public class EncryptUtil {
 	 * 方法名称:TripleDES_CBC_Decrypt
 	 * 功能描述:
 	 *
-	 *
 	 * 经过封装的三重DES / CBC解密算法
-	 *
-	 *
 	 *
 	 *
 	 * @param sourceBuf
@@ -199,11 +194,7 @@ public class EncryptUtil {
 	 * 方法名称:DES_CBC_Encrypt
 	 * 功能描述:
 	 *
-	 *
 	 * 经过封装的DES/CBC加密算法，如果包含中文，请注意编码。
-	 *
-	 *
-	 *
 	 *
 	 * @param sourceBuf
 	 *            需要加密内容的字节数组。
@@ -232,10 +223,7 @@ public class EncryptUtil {
 	 * 方法名称:DES_CBC_Decryp
 	 * 功能描述:
 	 *
-	 *
 	 * 经过封装的DES/CBC解密算法。
-	 *
-	 *
 	 *
 	 *
 	 * @param sourceBuf
@@ -266,11 +254,7 @@ public class EncryptUtil {
 	 * 方法名称:MD5Hash
 	 * 功能描述:
 	 *
-	 *
 	 * MD5，进行了简单的封装，以适用于加，解密字符串的校验。
-	 *
-	 *
-	 *
 	 *
 	 * @param buf
 	 *            需要MD5加密字节数组。
@@ -288,15 +272,37 @@ public class EncryptUtil {
 		return md.digest();
 	}
 
+	public static byte[] encryptMD5(byte[] data) throws IOException {
+		MessageDigest md = getMessageDigest(MD5);
+		return md.digest(data);
+	}
+	public static MessageDigest getMessageDigest(String algorithm) {
+		try {
+			return MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 *  进行md5加密
+	 * @param data 数据
+	 * @param charset 编码
+	 * @param upper 是否转换为大写
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getMD5(String data, String charset, boolean upper) throws IOException {
+		byte[] bytes = encryptMD5(StringUtils.toBytes(data, charset));
+		return byte2hex(bytes, upper);
+	}
+
 	/**
 	 *
 	 * 方法名称:byte2hex
 	 * 功能描述:
 	 *
-	 *
 	 * 字节数组转换为二行制表示
-	 *
-	 *
 	 *
 	 *
 	 * @param inStr
@@ -322,13 +328,34 @@ public class EncryptUtil {
 
 	/**
 	 *
+	 * @param bytes
+	 * @param upper 是否转化为大写
+	 * @return
+	 */
+	public static String byte2hex(byte[] bytes, boolean upper) {
+		StringBuilder sign = new StringBuilder();
+		for (int i = 0; i < bytes.length; i++) {
+			String hex = Integer.toHexString(bytes[i] & 0xFF);
+			if (hex.length() == 1) {
+				sign.append("0");
+			}
+			sign.append(hex);
+		}
+
+		if (upper) {
+			return sign.toString().toUpperCase();
+		} else {
+			return sign.toString();
+		}
+	}
+
+	/**
+	 *
 	 * 方法名称:addMD5
 	 * 功能描述:
 	 *
 	 *
 	 * MD校验码 组合方法，前16位放MD5Hash码。 把MD5验证码byte[]，加密内容byte[]组合的方法。
-	 *
-	 *
 	 *
 	 *
 	 * @param md5Byte
@@ -357,8 +384,6 @@ public class EncryptUtil {
 	 *
 	 * 方法名称:getKeyIV
 	 * 功能描述:
-	 *
-	 *
 	 *
 	 *
 	 *

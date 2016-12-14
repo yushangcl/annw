@@ -14,4 +14,7 @@ public class Constants {
 	public final static String EMAIL_PASSWORD = rbn.getString("email.password");
 	public final static String EMAIL_URL = rbn.getString("email.url");
 
+	//token
+	public final  static String TOKEN_KEY = rbn.getString("token.key");
+
 }
