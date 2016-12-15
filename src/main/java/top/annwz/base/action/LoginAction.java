@@ -70,15 +70,17 @@ public class LoginAction extends BasicAction {
 				map.put("userName", baUser.getUserName());
 				map.put("email", baUser.getEmail());
 				map.put("faceUrl", baUser.getFaceUrl());
+				map.put("token", getToken(Long.valueOf(baUser.getUserId())));
+				//token
 				abs.setData(map);
 				logger.info("登录成功: userId=" + baUser.getUserId());
-				//token
 
 			} else {
 				ReqUtil.setErrAbs(abs, "用户名或密码错误");
 			}
 		} catch (Exception e) {
 			logger.error("登录异常：" + email);
+			ReqUtil.setErrAbs(abs, "登录异常");
 		}
 		return abs;
 	}

@@ -682,25 +682,6 @@ public class DateUtil {
         return lRet;
     }
 
-    /**
-     * 取当前日期与2012-1-1的差
-     * date yymmdd
-     *
-     * @return 天数
-     */
-    public static long getDay(String date) {
-        Date now = parse(date, "yyMMdd");
-        if (now == null) {
-            now = Calendar.getInstance().getTime();
-        } else {
-            now.setSeconds(30);
-        }
-        Calendar c = Calendar.getInstance();
-        c.set(2012, 0, 1, 0, 0, 0);
-
-        return getDayDiff(c.getTime(), now);
-    }
-
 	/**
 	 * 将java.util.Date转换为 Unix Timestamp
 	 * 
