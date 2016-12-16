@@ -20,23 +20,47 @@ public class BaiduApi {
 	 * @param ip
 	 * @return
 	 */
-	public static Object getIpInfo(String ip) {
+	public static JSONObject getIpInfo(String ip) {
 		String httpUrl = "http://apis.baidu.com/apistore/iplookupservice/iplookup";
 		String httpArg = "ip=" + ip;
 		String jsonResult = request(httpUrl, httpArg);
-		return JSONObject.parse(jsonResult);
+		return JSONObject.parseObject(jsonResult);
 	}
 
 	/**
 	 * 查询城市的天气信息
-	 * @param city 拼音
+	 * @param cityPinyin 拼音
 	 * @return
 	 */
-	public static Object getWeatherInfo(String city) {
+	public static JSONObject getWeatherInfo(String cityPinyin) {
 		String httpUrl = "http://apis.baidu.com/heweather/weather/free";
-		String httpArg = "city=" + city;
+		String httpArg = "city=" + cityPinyin;
 		String jsonResult = request(httpUrl, httpArg);
-		return JSONObject.parse(jsonResult);
+		return JSONObject.parseObject(jsonResult);
+	}
+
+	/**
+	 * 根据城市名称查询天气信息
+	 * @param cityName 城市中文名
+	 * @return
+	 */
+	public static JSONObject getWeathe(String cityName) {
+		String httpUrl = "http://apis.baidu.com/apistore/weatherservice/cityname";
+		String httpArg = "cityname=" + cityName;
+		String jsonResult = request(httpUrl, httpArg);
+		return JSONObject.parseObject(jsonResult);
+	}
+
+	/**
+	 * 根据Ip查询城市地址，再查询天气信息
+	 * @param ip
+	 * @return
+	 */
+	public static JSONObject getWeatheByIP(String ip) {
+		JSONObject obj = BaiduApi.getIpInfo(ip);
+		String  city = obj.getJSONObject("retData").getString("district");
+		JSONObject jsonObject = BaiduApi.getWeathe(city);
+		return jsonObject;
 	}
 
 	/**
