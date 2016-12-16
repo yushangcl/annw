@@ -8,14 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 短信接口
+ * 阿里云api接口
  * Created by Wuhuahui on 2016/12/15.
  */
 
-public class MessageUtils {
-	private static Logger log = LogManager.getLogger(MessageUtils.class);
-	private static final String host = "http://sms.market.alicloudapi.com";
-	private static final String path = "/singleSendSms";
+public class AliyunApi {
+	private static Logger log = LogManager.getLogger(AliyunApi.class);
+
 	private static final String method = "GET";
 	private static final String appCode = "af8670f2f0534c469b0597b6fd834022";
 
@@ -30,6 +29,8 @@ public class MessageUtils {
 	 * @return
 	 */
 	public static int sendVerificationCode(String SignName, String TemplateCode, String phoneNum,  String code, String name) {
+		final String host = "http://sms.market.alicloudapi.com";
+		final String path = "/singleSendSms";
 		Map<String, String> headers = new HashMap<String, String>();
 		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 		headers.put("Authorization", "APPCODE " + appCode);
