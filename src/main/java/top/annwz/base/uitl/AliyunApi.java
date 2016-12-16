@@ -175,6 +175,6 @@ public class AliyunApi {
 
 
 	public static void main(String[] args) {
-		sendVerificationCode("测试", "SMS_34285489", "18368093869", "123456", "whh");
+		sendVerificationCode("懒人科技", "SMS_34285489", "18368093869", "54385", "吴华辉");
 	}
 }
