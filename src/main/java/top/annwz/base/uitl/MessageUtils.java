@@ -1,28 +1,46 @@
 package top.annwz.base.uitl;
 
 import org.apache.http.HttpResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 短信接口
  * Created by Wuhuahui on 2016/12/15.
  */
+
 public class MessageUtils {
-	public static void main(String[] args) {
-		String host = "http://sms.market.alicloudapi.com";
-		String path = "/singleSendSms";
-		String method = "GET";
+	private static Logger log = LogManager.getLogger(MessageUtils.class);
+	private static final String host = "http://sms.market.alicloudapi.com";
+	private static final String path = "/singleSendSms";
+	private static final String method = "GET";
+	private static final String appCode = "af8670f2f0534c469b0597b6fd834022";
+
+	/**
+	 * 发送短信验证码接口
+	 *
+	 * @param SignName 签名名称
+	 * @param TemplateCode 模板CODE
+	 * @param phoneNum 目标手机号,多条记录可以英文逗号分隔
+	 * @param code 验证码
+	 * @param name 用户名
+	 * @return
+	 */
+	public static int sendVerificationCode(String SignName, String TemplateCode, String phoneNum,  String code, String name) {
 		Map<String, String> headers = new HashMap<String, String>();
 		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
-		headers.put("Authorization", "APPCODE 你自己的AppCode");
-		Map<String, String> querys = new HashMap<String, String>();
-		querys.put("ParamString", "{\"no\":\"123456\"}");
-		querys.put("RecNum", "RecNum");
-		querys.put("SignName", "SignName");
-		querys.put("TemplateCode", "TemplateCode");
-
-
+		headers.put("Authorization", "APPCODE " + appCode);
+		Map<String, String > querys = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", name);
+		map.put("msg", code);
+		querys.put("ParamString", map.toString());
+		querys.put("RecNum", phoneNum);
+		querys.put("SignName", SignName);
+		querys.put("TemplateCode", TemplateCode);
 		try {
 			/**
 			 * 重要提示如下:
@@ -34,11 +52,17 @@ public class MessageUtils {
 			 * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
 			 */
 			HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
-			System.out.println(response.toString());
+			System.out.println(response);
 			//获取response的body
 			//System.out.println(EntityUtils.toString(response.getEntity()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("发送失败：" + e);
+			return 1;
 		}
+		return 0;
+	}
+
+	public static void main(String[] args) {
+		sendVerificationCode("测试", "SMS_34370181", "18268006317", "123456", "whh");
 	}
 }
