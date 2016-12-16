@@ -30,4 +30,10 @@ public class BaiduApiTest {
 		System.out.println(jsonObject);
 	}
 
+	@Test
+	public void getMobile() throws Exception {
+		JSONObject jsonObject = BaiduApi.getPhoneAttribution("18368093869");
+		System.out.println(jsonObject);
+	}
+
 }

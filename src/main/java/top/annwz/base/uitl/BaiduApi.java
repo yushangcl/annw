@@ -64,6 +64,18 @@ public class BaiduApi {
 	}
 
 	/**
+	 * 查询手机归属地
+	 * @param mobile
+	 * @return
+	 */
+	public static JSONObject getPhoneAttribution(String mobile) {
+		String httpUrl = "http://apis.baidu.com/showapi_open_bus/mobile/find";
+		String httpArg = "num=" + mobile;
+		String jsonResult = request(httpUrl, httpArg);
+		return JSONObject.parseObject(jsonResult);
+	}
+
+	/**
 	 * @param httpUrl
 	 *            :请求接口
 	 * @param httpArg

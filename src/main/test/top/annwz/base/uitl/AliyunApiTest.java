@@ -1,5 +1,6 @@
 package top.annwz.base.uitl;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -26,6 +27,11 @@ public class AliyunApiTest {
 	@Test
 	public void getWeather() throws Exception {
 
+	}
+	@Test
+	public void getWeatherByIP() throws Exception {
+		JSONObject jsonObject = AliyunApi.getWeatherByIP("115.236.172.146");
+		System.out.println(jsonObject.getString("showapi_res_body"));
 	}
 
 }
