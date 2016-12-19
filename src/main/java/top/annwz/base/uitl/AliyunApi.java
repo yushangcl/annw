@@ -88,7 +88,6 @@ public class AliyunApi {
 		String host = "https://dm-51.data.aliyun.com";
 		String path = "/rest/160601/ocr/ocr_idcard.json";
 		Map<String, String> headers = new HashMap<String, String>();
-		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 		headers.put("Authorization", "APPCODE " + appCode);
 		Map<String, String> querys = new HashMap<String, String>();
 		String bodys = "{\"inputs\":[{\"image\":{\"dataType\":50,\"dataValue\":\"base64_image_string(#括号内为描述，不需上传，图片以base64编码的string)\"},\"configure\":{\"dataType\":50,\"dataValue\":\"{\\\"side\\\":\\\"face(#括号内为描述，不需上传，身份证正反面类型:face/back)\\\"}\"}}]}";
@@ -105,7 +104,6 @@ public class AliyunApi {
 		String host = "http://jisutqybmf.market.alicloudapi.com";
 		String path = "/weather/city";
 		Map<String, String> headers = new HashMap<String, String>();
-		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 		headers.put("Authorization", "APPCODE " + appCode);
 		Map<String, String> querys = new HashMap<String, String>();
 
@@ -122,7 +120,6 @@ public class AliyunApi {
 		String host = "http://jisutqybmf.market.alicloudapi.com";
 		String path = "/weather/query";
 		Map<String, String> headers = new HashMap<String, String>();
-		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 		headers.put("Authorization", "APPCODE " + appCode);
 		Map<String, String> querys = new HashMap<String, String>();
 		querys.put("city", "安顺");
@@ -142,7 +139,6 @@ public class AliyunApi {
 		String host = "http://saweather.market.alicloudapi.com";
 		String path = "/ip-to-weather";
 		Map<String, String> headers = new HashMap<String, String>();
-		//最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 		headers.put("Authorization", "APPCODE " + appCode);
 		Map<String, String> querys = new HashMap<String, String>();
 		querys.put("ip", ip);
@@ -164,10 +160,7 @@ public class AliyunApi {
 
 	}
 
-
-
-
 	public static void main(String[] args) {
-		sendVerificationCode("懒人科技", "SMS_34285489", "18368093869", "54385", "吴华辉");
+		sendVerificationCode("懒人科技", "SMS_34305396", "18368093869", "54385", "吴华辉");
 	}
 }
