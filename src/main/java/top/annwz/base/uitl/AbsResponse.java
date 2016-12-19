@@ -1,6 +1,7 @@
 package top.annwz.base.uitl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import top.annwz.base.exception.annwException;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -33,7 +34,10 @@ public class AbsResponse<T> implements Serializable {
     @JsonIgnore
 	private Map<String, String> params;
 
-
+	public AbsResponse(annwException ex) {
+		this.code = ex.getErrCode();
+		this.msg = ex.getErrMsg();
+	}
     public AbsResponse() {
         this(0, null);
     }

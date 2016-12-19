@@ -58,7 +58,7 @@ public class MailUtil {
 			message.setSubject(mail.getSubject());
 
 			// Now set the actual message
-			message.setContent(mail.getMessage(), "text/html;charset=utf-8"); //发送HTML邮件，内容样式比较丰富
+			message.setContent(mail.getMessage(), "text/html;charset=gbk"); //发送HTML邮件，内容样式比较丰富
 
 			message.setSentDate(mail.getDate());//设置发信时间
 
