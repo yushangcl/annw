@@ -8,11 +8,11 @@
 <script>
 
     $(function () {
-        $("#test").click(test);
+        $("#test").click(ajax);
     })
     function ajax(url, data, type) {
         $.ajax( {
-            url : 'http://localhost:8060/login/login',
+            url : 'http://annwz.top/annw/api/login',
             type: 'POST', //HTTP请求类型
             data:JSON.stringify(GetJsonData()),
             dataType: 'json', //服务器返回json格式数据
@@ -26,7 +26,7 @@
                 var code = data.code;
                 var msg = data.msg;
                 var datas = JSON.stringify(data.data);
-                alert(datas)
+                alert('msg:'+msg +'  '+ 'data:'+datas)
 
             },
             error:function(){
@@ -36,7 +36,8 @@
         
         function GetJsonData() {
             var json = {
-                "userId":"123456"
+                "email":"623281847@qq.com",
+				"password":"Whh123456"
             }
            return json;
         }

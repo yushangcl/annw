@@ -17,25 +17,25 @@
     <!-- spring mvc 开启注解扫描-->
     <mvc:annotation-driven>
     </mvc:annotation-driven>
-    <bean id="messageConverter"
-          class="top.annwz.base.Intercept.MyMessageConverter">
-        <property name="objectMapper" ref="customObjectMapper"></property>
-        <property name="supportedMediaTypes">
-            <list>
-                <value>text/html;charset=UTF-8</value>
-                <value>text/plain;charset=UTF-8</value>
-                <value>application/json;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
-    <!-- Controller 不用再写异常处理，定义统一的处理-->
-    <bean id="handlerExceptionResolver" class="top.annwz.base.Intercept.AnnotationHandlerMethodExceptionResolver">
-        <property name="messageConverters">
-            <list>
-                <ref bean="messageConverter"/>
-            </list>
-        </property>
-    </bean>
+    <!--<bean id="messageConverter"-->
+          <!--class="top.annwz.base.Intercept.MyMessageConverter">-->
+        <!--<property name="objectMapper" ref="customObjectMapper"></property>-->
+        <!--<property name="supportedMediaTypes">-->
+            <!--<list>-->
+                <!--<value>text/html;charset=UTF-8</value>-->
+                <!--<value>text/plain;charset=UTF-8</value>-->
+                <!--<value>application/json;charset=UTF-8</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; Controller 不用再写异常处理，定义统一的处理&ndash;&gt;-->
+    <!--<bean id="handlerExceptionResolver" class="top.annwz.base.Intercept.AnnotationHandlerMethodExceptionResolver">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<ref bean="messageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
     <!-- 加载jdbc.properties -->
     <util:properties id="jdbc" location="classpath:jdbc-basic.properties">
     </util:properties>
