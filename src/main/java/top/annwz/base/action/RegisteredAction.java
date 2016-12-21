@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.annwz.base.dubbo.service.IBaCodeService;
+import top.annwz.base.dubbo.service.IBaLogService;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaCode;
+import top.annwz.base.entity.BaLog;
 import top.annwz.base.entity.BaUser;
 import top.annwz.base.entity.Mail;
 import top.annwz.base.sys.Constants;
@@ -29,6 +31,9 @@ public class RegisteredAction extends BasicAction {
 
 	@Resource
 	private IBaCodeService baCodeService;
+
+	@Resource
+	private IBaLogService baLogService;
 
 	/*
 	 * @ApiMethod:true
@@ -91,7 +96,6 @@ public class RegisteredAction extends BasicAction {
 			baUser.setEmail(email);
 			baUser.setEmailStatus(0);
 			baUser.setFaceUrl(Constants.USER_FACEURL);//注册的时候默认该头像
-			bauserService.insert(baUser);
 			ReqUtil.setSucAbs(abs, "success");
 			// 验证邮箱信息
 			String code = generateCode(email);
@@ -100,6 +104,8 @@ public class RegisteredAction extends BasicAction {
 				ReqUtil.setErrAbs(abs, "邮件发送失败");
 				return abs;
 			}
+			bauserService.insert(baUser);
+			//TODO 记录日志
 		} catch (Exception e) {
 			logger.error("注册失败：" + baUser);
 		}
