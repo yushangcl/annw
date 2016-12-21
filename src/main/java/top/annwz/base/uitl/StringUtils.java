@@ -2,7 +2,7 @@ package top.annwz.base.uitl;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,6 +12,14 @@ import java.util.*;
 public abstract class StringUtils {
 
 
+    /**
+     * 随机生成六位数验证码
+     * @return
+     */
+    public static int getRandomNum(){
+        Random r = new Random();
+        return r.nextInt(900000)+100000;//(Math.random()*(999999-100000)+100000)
+    }
     /**
      * 检查指定的字符串是否为空。
      * <ul>
@@ -559,6 +567,41 @@ public abstract class StringUtils {
      */
     public static String getRandomStr(int length) {
         return RandomStringUtils.randomAlphanumeric(length);
+    }
+
+
+    /**
+     * 读取txt里的单行内容
+     * @param fileP  文件路径
+     */
+    public static String readTxtFile(String fileP) {
+        try {
+
+            String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))+"../../";	//项目路径
+            filePath = filePath.replaceAll("file:/", "");
+            filePath = filePath.replaceAll("%20", " ");
+            filePath = filePath.trim() + fileP.trim();
+            if(filePath.indexOf(":") != 1){
+                filePath = File.separator + filePath;
+            }
+            String encoding = "utf-8";
+            File file = new File(filePath);
+            if (file.isFile() && file.exists()) { 		// 判断文件是否存在
+                InputStreamReader read = new InputStreamReader(
+                        new FileInputStream(file), encoding);	// 考虑到编码格式
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String lineTxt = null;
+                while ((lineTxt = bufferedReader.readLine()) != null) {
+                    return lineTxt;
+                }
+                read.close();
+            }else{
+                System.out.println("找不到指定的文件,查看此路径是否正确:"+filePath);
+            }
+        } catch (Exception e) {
+            System.out.println("读取文件内容出错");
+        }
+        return "";
     }
     
 }
