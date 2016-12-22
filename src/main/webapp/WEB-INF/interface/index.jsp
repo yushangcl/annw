@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!doctype html>
         <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
         <!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
@@ -187,7 +189,7 @@
 
                                                 <section class="widget">
                                                         <div class="support-widget">
-                                                                <h3 class="title">Support</h3>
+                                                                <h3 class="title">${name}</h3>
                                                                 <p class="intro">Need more support? If you did not found an answer, contact us for further help.</p>
                                                         </div>
                                                 </section>

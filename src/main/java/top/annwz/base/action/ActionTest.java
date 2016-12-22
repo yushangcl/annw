@@ -28,22 +28,16 @@ public class ActionTest extends BasicAction{
 	 * 访问登录页
 	 * @return
 	 */
-//	@RequestMapping(value="/login_toLogin")
-//	public ModelAndView toLogin() throws Exception{
-//		ModelAndView mv = this.getModelAndView();
-//		PageData pd = new PageData();
-//		pd = this.getPageData();
-//		pd.put("SYSNAME", "登录"); //读取系统名称
-//		mv.setViewName("interface/index.jsp");
-//		mv.addObject("pd",pd);
-//		return mv;
-//	}
-
-
-	@RequestMapping("/test")
-	public ModelAndView test() throws Exception{
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(value="/login_toLogin")
+	public ModelAndView toLogin() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd.put("SYSNAME", "登录"); //读取系统名称
 		mv.setViewName("index");
+		mv.addObject("name","Wuhuahui");
 		return mv;
 	}
+
+
 }
