@@ -21,6 +21,9 @@ public class Constants {
 	//faceUrl
 	public final static String USER_FACEURL = rbn.getString("user.faceUrl");
 
+	//test
+	public final static String TEST_NAME = rbn.getString("test.name");
+
 //
 	public static final String PAGE	= "admin/config/PAGE.txt";			//分页条数配置路径
 	public static final String EMAIL = "admin/config/EMAIL.txt";		//邮箱服务器配置路径

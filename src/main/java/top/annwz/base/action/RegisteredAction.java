@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.annwz.base.dubbo.service.IBaCodeService;
-import top.annwz.base.dubbo.service.IBaLogService;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaCode;
-import top.annwz.base.entity.BaLog;
 import top.annwz.base.entity.BaUser;
 import top.annwz.base.entity.Mail;
 import top.annwz.base.sys.Constants;
@@ -31,9 +29,6 @@ public class RegisteredAction extends BasicAction {
 
 	@Resource
 	private IBaCodeService baCodeService;
-
-	@Resource
-	private IBaLogService baLogService;
 
 	/*
 	 * @ApiMethod:true
