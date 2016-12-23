@@ -177,6 +177,16 @@
           <artifactId>thumbnailator</artifactId>
           <version>RELEASE</version>
       </dependency>
+      <dependency>
+          <groupId>org.apache.shiro</groupId>
+          <artifactId>shiro-core</artifactId>
+          <version>RELEASE</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.session</groupId>
+          <artifactId>spring-session</artifactId>
+          <version>RELEASE</version>
+      </dependency>
 
   </dependencies>
 

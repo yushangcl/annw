@@ -86,6 +86,12 @@ public class LoginAction extends BasicAction {
 		return abs;
 	}
 
+	public AbsResponse<HashMap<String, Object>> loginOut(@RequestBody HashMap<String, Object> params) throws Exception {
+		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
+
+		return abs;
+	}
+
 	private String getToken(Long userId) throws IOException {
 		String time = DateUtil.toDateTimeString(new Date());
 		String data = Constants.TOKEN_KEY + userId + time;

@@ -37,5 +37,13 @@ public class Constants {
 	public static final String FILEPATHTWODIMENSIONCODE = "uploadFiles/twoDimensionCode/"; //二维码存放路径
 	public static final String NO_INTERCEPTOR_PATH = ".*/((login)|(logout)|(code)|(app)|(weixin)|(static)|(main)|(websocket)).*";	//不对匹配该值的访问路径拦截（正则）
 
-
+	/**
+	 * 异常信息统一头信息<br>
+	 * 非常遗憾的通知您,程序发生了异常
+	 */
+	public static final String Exception_Head = "OH,MY GOD! SOME ERRORS OCCURED! AS FOLLOWS :";
+	/** 客户端语言 */
+	public static final String USERLANGUAGE = "userLanguage";
+	/** 当前用户 */
+	public static final String CURRENT_USER = "CURRENT_USER";
 }

@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.*;
 
-public abstract class StringUtils {
+public abstract class StringUtils extends org.apache.commons.lang.StringUtils{
 
 
     /**
