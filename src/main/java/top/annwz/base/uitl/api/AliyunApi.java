@@ -1,10 +1,11 @@
-package top.annwz.base.uitl;
+package top.annwz.base.uitl.api;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import top.annwz.base.uitl.HttpUtils;
 
 import java.util.HashMap;
 import java.util.Map;

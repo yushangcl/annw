@@ -5,8 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.annwz.base.entity.Mail;
-import top.annwz.base.uitl.EmailUtil;
-import top.annwz.base.uitl.MailUtil;
+import top.annwz.base.uitl.email.MailUtil;
 
 /**
  * Created by Wuhuahui on 2016/12/5.

@@ -1,10 +1,11 @@
-package top.annwz.base.action;
+package top.annwz.base.action.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.annwz.base.action.BasicAction;
 import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaUser;
 import top.annwz.base.sys.Constants;

@@ -61,7 +61,7 @@ public final class RMBUtil {
 	 * 将货币转换为大写形式(类内部调用)<br>
 	 * 输入字符串必须正整数，只允许前导空格(必须右对齐)，不宜有前导零
 	 * 
-	 * @param val
+	 * @param NumStr
 	 * @return String
 	 */
 	private static String PositiveIntegerToHanStr(String NumStr) {

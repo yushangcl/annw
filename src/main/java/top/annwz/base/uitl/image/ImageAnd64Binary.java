@@ -1,4 +1,4 @@
-package top.annwz.base.uitl;
+package top.annwz.base.uitl.image;
 
 
 import sun.misc.BASE64Decoder;

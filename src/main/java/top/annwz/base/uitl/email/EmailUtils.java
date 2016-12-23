@@ -1,4 +1,4 @@
-package top.annwz.base.uitl;
+package top.annwz.base.uitl.email;
 
 import top.annwz.base.entity.BaUser;
 

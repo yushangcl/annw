@@ -1,4 +1,4 @@
-package top.annwz.base.uitl;
+package top.annwz.base.uitl.email;
 
 /**
  * Created by Wuhuahui on 2016/12/2.

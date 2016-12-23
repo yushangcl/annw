@@ -87,10 +87,12 @@
     <mvc:resources mapping="/css/**" location="/interface/css/" />
     <mvc:resources mapping="/images/**" location="/interface/images/" />
     <mvc:resources mapping="/js/**" location="/interface/js/" />
+    <mvc:resources mapping="/assets/**" location="/interface/assets/" />
+    <mvc:resources mapping="/img/**" location="/interface/img/" />
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-        <property name="prefix" value="/WEB-INF/interface/" />
+        <property name="prefix" value="/WEB-INF/" />
         <property name="suffix" value=".jsp" />
     </bean>
 

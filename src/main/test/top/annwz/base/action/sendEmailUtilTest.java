@@ -2,8 +2,8 @@ package top.annwz.base.action;
 
 import org.junit.Test;
 import top.annwz.base.entity.Mail;
-import top.annwz.base.uitl.EmailUtil;
-import top.annwz.base.uitl.MailUtil;
+import top.annwz.base.uitl.email.EmailUtil;
+import top.annwz.base.uitl.email.MailUtil;
 
 import java.util.Arrays;
 import java.util.List;

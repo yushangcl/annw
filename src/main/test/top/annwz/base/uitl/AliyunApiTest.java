@@ -2,8 +2,7 @@ package top.annwz.base.uitl;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import top.annwz.base.uitl.api.AliyunApi;
 
 /**
  * Created by Wuhuahui on 2016/12/16.

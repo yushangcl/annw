@@ -1,4 +1,4 @@
-package top.annwz.base.uitl;
+package top.annwz.base.uitl.api;
 
 import com.alibaba.fastjson.JSONObject;
 
