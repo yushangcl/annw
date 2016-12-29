@@ -12,6 +12,7 @@ import top.annwz.base.sys.Constants;
 import top.annwz.base.uitl.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,6 +74,7 @@ public class LoginAction extends BasicAction {
 				map.put("faceUrl", baUser.getFaceUrl());
 				map.put("token", getToken(Long.valueOf(baUser.getUserId())));
 				//token
+				WebUtil.saveCurrentUser(map);
 				abs.setData(map);
 				logger.info("登录成功: userId=" + baUser.getUserId());
 
@@ -86,9 +88,16 @@ public class LoginAction extends BasicAction {
 		return abs;
 	}
 
-	public AbsResponse<HashMap<String, Object>> loginOut(@RequestBody HashMap<String, Object> params) throws Exception {
+	/**
+	 * 用户登出
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "loginOut")
+	public AbsResponse<HashMap<String, Object>> loginOut(HttpServletRequest request) throws Exception {
 		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
-
+		WebUtil.removeCurrentUser(request);
 		return abs;
 	}
 
