@@ -5,6 +5,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import top.annwz.base.sys.Constants;
 import top.annwz.base.uitl.HttpUtils;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class AliyunApi {
 	private static final String methodGet = "GET";
 	private static final String methodPost = "POST";
 
-	private static final String appCode = "af8670f2f0534c469b0597b6fd834022";
+	private static final String appCode = Constants.ALIYUN_APPKEY;
 
 	/**
 	 * 发送短信验证码接口
@@ -148,6 +149,10 @@ public class AliyunApi {
 		querys.put("needHourData", "0");
 		querys.put("needIndex", "0");
 		querys.put("needMoreDay", "0");
+		return request(host, path, methodGet, headers, querys);
+
+	}
+	private static JSONObject request(String host, String path, String methodGet, Map<String, String> headers, Map<String, String> querys) {
 		try {
 			HttpResponse response = HttpUtils.doGet(host, path, methodGet, headers, querys);
 //			System.out.println(response.toString());
@@ -158,7 +163,6 @@ public class AliyunApi {
 			e.printStackTrace();
 			return new JSONObject();
 		}
-
 	}
 
 	public static void main(String[] args) {

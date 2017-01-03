@@ -1,6 +1,7 @@
 package top.annwz.base.uitl.api;
 
 import com.alibaba.fastjson.JSONObject;
+import top.annwz.base.sys.Constants;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ import java.net.URL;
  */
 public class BaiduApi {
 
-	private static final String apikey= "7dc3593031bff796d02153132e7d52e1";
+	private static final String apikey= Constants.BAIDU_APPKEY;
 
 	/**
 	 * 查询 ip地址信息
