@@ -10,6 +10,7 @@ import top.annwz.base.entity.Mail;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -55,7 +56,7 @@ public class MailUtil {
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail.getReceiver()));
 
 			// Set Subject: header field
-			message.setSubject(mail.getSubject());
+			message.setSubject(MimeUtility.encodeText(mail.getSubject(),MimeUtility.mimeCharset("gb2312"), null));
 
 			// Now set the actual message
 			message.setContent(mail.getMessage(), "text/html;charset=gbk"); //发送HTML邮件，内容样式比较丰富
@@ -71,6 +72,8 @@ public class MailUtil {
 		} catch (MessagingException e) {
 
 			throw new RuntimeException(e);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		return "success";
 	}
