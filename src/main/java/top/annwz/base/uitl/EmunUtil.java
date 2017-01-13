@@ -57,7 +57,7 @@ public class EmunUtil {
     }
 
     private static void createEmunFile(ResultSet rs) throws IOException, SQLException {
-        Map<String, List<JSONObject>> map = new HashMap<>();
+        Map<String, List<JSONObject>> map = new HashMap<String, List<JSONObject>>();
         while (rs.next()) {
             String defined_code_type = rs.getString("DEFINED_CODE_TYPE");
             JSONObject obj = new JSONObject();
@@ -69,7 +69,7 @@ public class EmunUtil {
                 //修改 文件
                 createEmunFile(map);
                 //重新循环
-                List<JSONObject> list = new ArrayList<>();
+                List<JSONObject> list = new ArrayList<JSONObject>();
                 list.add(obj);
                 map.put(defined_code_type, list);
             }
