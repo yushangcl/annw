@@ -1,4 +1,4 @@
-package top.annwz.base.enums;
+package top.annwz.base.common.enums;
 
 import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.lang.enums.Enum;

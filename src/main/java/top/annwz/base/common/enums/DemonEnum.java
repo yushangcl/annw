@@ -1,4 +1,4 @@
-package top.annwz.base.enums;
+package top.annwz.base.common.enums;
 
 
 /**
