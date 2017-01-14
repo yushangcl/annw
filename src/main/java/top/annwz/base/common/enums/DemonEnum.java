@@ -1,6 +1,9 @@
 package top.annwz.base.common.enums;
 
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 反枚举使用demo
  * Created by WJP on 2017/1/13.
@@ -43,16 +46,16 @@ public class DemonEnum extends BasicEnum<Integer>{
     /**
      * 查找当前类型的所有枚举类
      */
-//    public static List<DemonEnum> getEnumList(){
-//        return BasicEnum.getEnumList(DemonEnum.class);
-//    }
+    public static List<DemonEnum> getEnumList(){
+        return BasicEnum.getEnumList(DemonEnum.class);
+    }
 
     /**
      * 查询当前类型所有的枚举类map
      * @return
      */
-//    public static Map getEnumMap(){
-//        return BasicEnum.getEnumMap(DemonEnum.class);
-//    }
+    public static Map getEnumMap(){
+        return BasicEnum.getEnumMap(DemonEnum.class);
+    }
 
 }

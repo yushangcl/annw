@@ -57,7 +57,7 @@ public abstract class BasicEnum<T extends Object> extends Enum {
 
     /**
      * 查询当前类型所有的枚举类map
-     * @param enumClass:必须是枚举类而不是普通类
+     * @param enumClass
      * @return
      */
     @SuppressWarnings("rawtypes")
@@ -73,7 +73,7 @@ public abstract class BasicEnum<T extends Object> extends Enum {
 
     /**
      * 查询当前类型所有的枚举类list
-     * @param enumClass:必须是枚举类而不是普通类
+     * @param enumClass
      * @return
      */
     @SuppressWarnings("rawtypes")
