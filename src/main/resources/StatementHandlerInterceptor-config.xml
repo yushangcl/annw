@@ -9,10 +9,10 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <typeAliases>
-        <typeAlias alias="pageParameter" type="cn.com.iscs.common.util.PageParameter"/>
+        <typeAlias alias="pageParameter" type="top.annwz.base.uitl.PageParameter"/>
     </typeAliases>
 
     <plugins>
-        <plugin interceptor="cn.com.iscs.common.mybatis.StatementHandlerInterceptor"></plugin>
+        <plugin interceptor="top.annwz.base.mybatis.StatementHandlerInterceptor"></plugin>
     </plugins>
 </configuration>
