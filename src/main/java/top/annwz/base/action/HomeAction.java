@@ -24,4 +24,11 @@ public class HomeAction extends BasicAction{
 		absResponse.setData(map);
 		return absResponse;
 	}
+
+	@RequestMapping("get")
+	public AbsResponse getinfo() {
+		AbsResponse absResponse = new AbsResponse();
+
+		return absResponse;
+	}
 }

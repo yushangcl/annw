@@ -14,7 +14,6 @@ import java.net.URL;
  */
 public class BaiduApi {
 
-	private static final String apikey= Constants.BAIDU_APPKEY;
 
 	/**
 	 * 查询 ip地址信息
@@ -417,7 +416,7 @@ public class BaiduApi {
 					.openConnection();
 			connection.setRequestMethod("GET");
 			// 填入apikey到HTTP header
-			connection.setRequestProperty("apikey", apikey);
+			connection.setRequestProperty("apikey", Constants.BAIDU_APPKEY);
 			connection.connect();
 			InputStream is = connection.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));

@@ -21,6 +21,11 @@ public class Constants {
 	//faceUrl
 	public final static String USER_FACEURL = rbn.getString("user.faceUrl");
 
+	//appkey
+	public final static String ALIYUN_APPKEY = rbn.getString("aliyun.key");
+	public final static String BAIDU_APPKEY = rbn.getString("baidu.key");
+
+
 	//test
 	public final static String TEST_NAME = rbn.getString("test.name");
 

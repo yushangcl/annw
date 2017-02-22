@@ -11,6 +11,7 @@ import top.annwz.base.dubbo.service.IBaUserService;
 import top.annwz.base.entity.BaCode;
 import top.annwz.base.entity.BaUser;
 import top.annwz.base.entity.Mail;
+import top.annwz.base.service.IRegisteredService;
 import top.annwz.base.sys.Constants;
 import top.annwz.base.uitl.*;
 import top.annwz.base.uitl.email.MailUtil;
@@ -27,10 +28,13 @@ import java.util.HashMap;
 @RequestMapping("/api")
 public class RegisteredAction extends BasicAction {
 	@Resource
-	private IBaUserService bauserService;
+	private IBaUserService baUserService;
 
 	@Resource
 	private IBaCodeService baCodeService;
+
+	@Resource
+	private IRegisteredService registeredService;
 
 	/*
 	 * @ApiMethod:true
@@ -80,7 +84,7 @@ public class RegisteredAction extends BasicAction {
 			ReqUtil.setErrAbs(abs, "密码格式不正确");
 			return abs;
 		}
-		BaUser baUser = bauserService.getByEmail(email);
+		BaUser baUser = baUserService.getByEmail(email);
 		if (baUser != null ) {
 			ReqUtil.setErrAbs(abs, "该邮箱已被注册");
 			return abs;
@@ -95,13 +99,13 @@ public class RegisteredAction extends BasicAction {
 			baUser.setFaceUrl(Constants.USER_FACEURL);//注册的时候默认该头像
 			ReqUtil.setSucAbs(abs, "success");
 			// 验证邮箱信息
-			String code = generateCode(email);
-			boolean isSend = sendEmail(email, userName, code);//发送验证邮箱 邮件
-			if (!isSend) {
-				ReqUtil.setErrAbs(abs, "邮件发送失败");
-				return abs;
-			}
-			bauserService.insert(baUser);
+//			String code = generateCode(email);
+//			boolean isSend = sendEmail(email, userName, code);//发送验证邮箱 邮件
+//			if (!isSend) {
+//				ReqUtil.setErrAbs(abs, "邮件发送失败");
+//				return abs;
+//			}
+			baUserService.insert(baUser);
 			//TODO 记录日志
 		} catch (Exception e) {
 			logger.error("注册失败：" + baUser);
@@ -125,70 +129,36 @@ public class RegisteredAction extends BasicAction {
 	 * @ApiMethodEnd
 	 */
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
-	public AbsResponse<HashMap<String, Object>> verifyEmail(HttpServletRequest request) {
+	public AbsResponse<HashMap<String, Object>> verifyEmail(HttpServletRequest request) throws Exception{
 		AbsResponse<HashMap<String, Object>> abs = new AbsResponse<HashMap<String, Object>>();
 		String codeValue = request.getParameter("code");
+		if (StringUtils.isEmpty(codeValue)) {
+			ReqUtil.setErrAbs(abs, "参数缺失");
+			return abs;
+		}
+
 		BaCode baCode = baCodeService.getByCodeValue(codeValue);
+
 		if (baCode == null) {
 			ReqUtil.setErrAbs(abs, "验证链接失效");
 			return abs;
 		}
+
 		if (baCode.getCodeStatus() == null || baCode.getCodeStatus() != 0) {
 			ReqUtil.setErrAbs(abs, "邮箱已激活");
 			return abs;
 		}
-		int co = baCodeService.updateCodeStatus(codeValue);
-		int count = bauserService.updateStatusByEmail(baCode.getEmail());
-		if (co != 1 || count != 1) {
+
+		if (!registeredService.updateStatus(codeValue, baCode.getEmail())) {
 			ReqUtil.setErrAbs(abs, "激活失败");
 			return abs;
 		}
+
 		ReqUtil.setSucAbs(abs,"邮箱验证成功");
 		return abs;
 	}
 
-	/**
-	 * 发送邮件
-	 * @param email
-	 * @param userName
-	 * @param code
-	 * @return 发送成功返回true 失败返回false
-	 */
-	private boolean sendEmail(String email, String userName, String code) {
-		Mail mail = new Mail();
-		try {
-			mail.setHost(Constants.EMAIL_HOST);
-			String info = "恭喜您注册成功，您的用户名：" + userName +
-					"点击该链接验证邮箱<br><a href='"+ Constants.EMAIL_URL+"?code="+code +"'>"+Constants.EMAIL_URL+"?code="+code+"</a><br>如有问题请联系网站客服!!";
-			mail.setMessage(info);
-			mail.setReceiver(email);
-			mail.setSender(Constants.EMAIL_SENDER);
-			mail.setUsername(Constants.EMAIL_USERNAME);
-			mail.setPassword(Constants.EMAIL_PASSWORD);
-			mail.setSubject("懒人科技 用户注册验证邮箱");
-			MailUtil.sendEmail(mail);
-		} catch (Exception e) {
-			logger.error("发送邮件失败：" + email);
-			return false;
-		}
-		return true;
-	}
 
-	/**
-	 * 生成 邮箱验证code
-	 * @param email
-	 * @return code
-	 */
-	private String generateCode(String email) {
-		String code = StringUtils.getRandomString(40);
-		BaCode baCode = new BaCode();
-		baCode.setEmail(email);
-		baCode.setCodeStatus(0);
-		baCode.setCodeType("registered");
-		baCode.setCodeValue(code);
-		baCodeService.insert(baCode);
-		return code;
-	}
 
 
 }
