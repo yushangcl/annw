@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd"
+    default-lazy-init="true"
+    >
+
+    <!--声明配置文件-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="4"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:/service-config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--在配置文件中写好-->
+    <bean id="filesClient" class="com.mosso.client.cloudfiles.FilesClient" init-method="login" lazy-init="true">
+        <property name="username" value="${fileserver.userName}"></property>
+        <property name="password" value="${fileserver.password}"></property>
+        <property name="account" value="${fileserver.account}"></property>
+        <property name="authenticationURL" value="${fileserver.authenticationURL}"></property>
+    </bean>
+</beans>
