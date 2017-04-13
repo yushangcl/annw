@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @ClassName: ListFileServlet
  * @Description: 列出Web系统中所有下载文件
- * @author: Wuhuahui
+ * @author: huahui.wu
  * @date:
  */
 public class ListFileServlet extends HttpServlet {
@@ -36,7 +36,7 @@ public class ListFileServlet extends HttpServlet {
 	 * @param map  存储文件名的Map集合
 	 * @Method: listfile
 	 * @Description: 递归遍历指定目录下的所有文件
-	 * @Anthor:孤傲苍狼
+	 * @Anthor: huahui.wu
 	 */
 	public void listfile(File file, Map<String, String> map) {
 		//如果file代表的不是一个文件，而是一个目录

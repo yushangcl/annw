@@ -91,22 +91,8 @@ public class RegisteredAction extends BasicAction {
 		}
 		baUser = new BaUser();
 		try {
-			baUser.setUserName(userName);
-			baUser.setPassword(EncryptUtil.encrypt(password));//进行EncryptUtil.decrypt();
-			baUser.setMobile(mobile);
-			baUser.setEmail(email);
-			baUser.setEmailStatus(0);
-			baUser.setFaceUrl(Constants.USER_FACEURL);//注册的时候默认该头像
-			ReqUtil.setSucAbs(abs, "success");
-			// 验证邮箱信息
-//			String code = generateCode(email);
-//			boolean isSend = sendEmail(email, userName, code);//发送验证邮箱 邮件
-//			if (!isSend) {
-//				ReqUtil.setErrAbs(abs, "邮件发送失败");
-//				return abs;
-//			}
-			baUserService.insert(baUser);
-			//TODO 记录日志
+			abs = registeredService.saveRegisterInfo(userName, password, mobile, email);
+
 		} catch (Exception e) {
 			logger.error("注册失败：" + baUser);
 		}

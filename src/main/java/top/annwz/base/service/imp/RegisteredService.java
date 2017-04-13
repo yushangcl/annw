@@ -10,6 +10,9 @@ import top.annwz.base.entity.BaUser;
 import top.annwz.base.entity.Mail;
 import top.annwz.base.service.IRegisteredService;
 import top.annwz.base.sys.Constants;
+import top.annwz.base.uitl.AbsResponse;
+import top.annwz.base.uitl.EncryptUtil;
+import top.annwz.base.uitl.ReqUtil;
 import top.annwz.base.uitl.StringUtils;
 import top.annwz.base.uitl.email.MailUtil;
 
@@ -27,9 +30,31 @@ public class RegisteredService implements IRegisteredService {
 
 	@Resource
 	private IBaCodeService baCodeService;
+
 	@Override
-	public BaUser saveRegisterInfo(String username, String password, String mobile, String email) throws Exception {
-		return null;
+	public AbsResponse saveRegisterInfo(String userName, String password, String mobile, String email) throws Exception {
+		AbsResponse abs = new AbsResponse();
+
+		//密码加密 盐值加密 salt
+
+		BaUser baUser = new BaUser();
+		baUser.setUserName(userName);
+		baUser.setPassword(EncryptUtil.encrypt(password));//进行EncryptUtil.decrypt();
+		baUser.setMobile(mobile);
+		baUser.setEmail(email);
+		baUser.setEmailStatus(0);
+		baUser.setFaceUrl(Constants.USER_FACEURL);//注册的时候默认该头像
+
+		// 验证邮箱信息
+		String code = generateCode(email);
+		boolean isSend = sendEmail(email, userName, code);//发送验证邮箱 邮件
+		if (!isSend) {
+			ReqUtil.setErrAbs(abs, "邮件发送失败");
+			return abs;
+		}
+		baUserService.insert(baUser);
+		//TODO 记录日志
+		return abs;
 	}
 
 	@Override
@@ -50,6 +75,7 @@ public class RegisteredService implements IRegisteredService {
 
 	/**
 	 * 发送邮件
+	 *
 	 * @param email
 	 * @param userName
 	 * @param code
@@ -60,7 +86,7 @@ public class RegisteredService implements IRegisteredService {
 		try {
 			mail.setHost(Constants.EMAIL_HOST);
 			String info = "恭喜您注册成功，您的用户名：" + userName +
-					"点击该链接验证邮箱<br><a href='"+ Constants.EMAIL_URL+"?code="+code +"'>"+Constants.EMAIL_URL+"?code="+code+"</a><br>如有问题请联系网站客服!!";
+					"点击该链接验证邮箱<br><a href='" + Constants.EMAIL_URL + "?code=" + code + "'>" + Constants.EMAIL_URL + "?code=" + code + "</a><br>如有问题请联系网站客服!!";
 			mail.setMessage(info);
 			mail.setReceiver(email);
 			mail.setSender(Constants.EMAIL_SENDER);
@@ -77,6 +103,7 @@ public class RegisteredService implements IRegisteredService {
 
 	/**
 	 * 生成 邮箱验证code
+	 *
 	 * @param email
 	 * @return code
 	 */

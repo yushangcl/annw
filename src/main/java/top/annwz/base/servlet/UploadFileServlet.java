@@ -163,7 +163,7 @@ public class UploadFileServlet extends HttpServlet {
 	 * @return 新的存储目录
 	 * @Method: makePath
 	 * @Description:
-	 * @Anthor:
+	 * @Anthor: huahui.wu
 	 */
 	private String makePath(String filename, String savePath) {
 		//得到文件名的hashCode的值，得到的就是filename这个字符串对象在内存中的地址

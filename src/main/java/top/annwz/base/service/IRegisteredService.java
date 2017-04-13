@@ -1,6 +1,7 @@
 package top.annwz.base.service;
 
 import top.annwz.base.entity.BaUser;
+import top.annwz.base.uitl.AbsResponse;
 
 /**
  * Created by Wuhuahui on 2016/12/8.
@@ -12,7 +13,7 @@ public interface IRegisteredService {
 	 * @param
 	 * @author sunkuo
 	 * */
-	BaUser saveRegisterInfo(String username, String password, String mobile, String email) throws Exception;
+	AbsResponse saveRegisterInfo(String userName, String password, String mobile, String email) throws Exception;
 
 	/**
 	 * 更新，验证验证邮箱

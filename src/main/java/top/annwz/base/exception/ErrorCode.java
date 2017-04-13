@@ -1,13 +1,7 @@
 package top.annwz.base.exception;
 
 /**
- * 1** 参数类错误<br/>
- * 2**<br/>
- * 3** 计算逻辑类错误<br/>
- * 4**<br/>
- * 5**<br/>
- *
- * @author huangzhigang <br/>
+ * @author wuhuahui <br/>
  */
 public enum ErrorCode {
 
