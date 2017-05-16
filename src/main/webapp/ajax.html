@@ -12,7 +12,7 @@
     })
     function ajax(url, data, type) {
         $.ajax( {
-            url : 'http://annwz.top/annw/api/login',
+            url : 'http://127.0.0.1:8060/api/sendEmail',
             type: 'POST', //HTTP请求类型
             data:JSON.stringify(GetJsonData()),
             dataType: 'json', //服务器返回json格式数据
@@ -37,7 +37,8 @@
         function GetJsonData() {
             var json = {
                 "email":"623281847@qq.com",
-				"password":"Whh123456"
+				"name":"Whh123456",
+                "info":"fihaohfoai hoiahfoiahfoaihofiha"
             }
            return json;
         }
@@ -46,6 +47,7 @@
 <body>
     <div>
         <li class="test" id="test"> <button>测试</button></li>
+        <!---->
     </div>
 </body>
 </html>

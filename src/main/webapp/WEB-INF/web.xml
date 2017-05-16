@@ -11,7 +11,7 @@
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>UploadFileServlet</servlet-name>
-        <servlet-class>top.annwz.base.servlet.UploadFileServlet</servlet-class>
+        <servlet-class>top.annwz.base.servlet.files.UploadFileServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -21,7 +21,7 @@
 
     <servlet>
         <servlet-name>ListFileServlet</servlet-name>
-        <servlet-class>top.annwz.base.servlet.ListFileServlet</servlet-class>
+        <servlet-class>top.annwz.base.servlet.files.ListFileServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>DownLoadFileServlet</servlet-name>
-        <servlet-class>top.annwz.base.servlet.DownLoadFileServlet</servlet-class>
+        <servlet-class>top.annwz.base.servlet.files.DownLoadFileServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
