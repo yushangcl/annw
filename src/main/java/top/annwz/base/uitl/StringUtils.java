@@ -126,9 +126,16 @@ public abstract class StringUtils extends org.apache.commons.lang.StringUtils{
     public static String toString(byte[] bytes, String charset) {
         return toString(bytes, 0, bytes.length, charset);
     }
-    
-    public static String toString(Object obj) {
-    	return obj != null ? obj.toString() : null;
+
+    public static <T> String toString(T t) {
+        if (t == null) {
+            return null;
+        }
+        if (t instanceof byte[] || t instanceof Byte[]) {
+            return new String((byte[]) t);
+        } else {
+            return t.toString();
+        }
     }
 
     public static String toString(byte[] data, int offset, int length, String charset) {

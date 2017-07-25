@@ -28,17 +28,17 @@ public class JuHeApi {
 		params.put("dtype", dateType);//返回数据格式：json或xml,默认json
 		params.put("key", APPKEY);//你申请的key
 
-		try {
-			result =net(url, params, "GET");
-			JSONObject object = JSONObject.parseObject(result);
-			if(object.get("error_code")==0){
-				System.out.println(object.get("result"));
-			}else{
-				System.out.println(object.get("error_code")+":"+object.get("reason"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			result =net(url, params, "GET");
+//			JSONObject object = JSONObject.parseObject(result);
+//			if(object.get("error_code")==0){
+//				System.out.println(object.get("result"));
+//			}else{
+//				System.out.println(object.get("error_code")+":"+object.get("reason"));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 

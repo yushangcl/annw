@@ -7,11 +7,15 @@
   <version>1.0-SNAPSHOT</version>
   <name>xyz.annw Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <org.springframework.version>4.3.8.RELEASE</org.springframework.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
       <dependency>
@@ -28,12 +32,6 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-1.2-api</artifactId>
       <version>2.5</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
     </dependency>
       <dependency>
           <groupId>commons-logging</groupId>
@@ -73,17 +71,50 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>${org.springframework.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>${org.springframework.version}</version>
+    </dependency>
+    <!-- spring框架 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${org.springframework.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
-      <version>4.1.6.RELEASE</version>
+      <version>${org.springframework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${org.springframework.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${org.springframework.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-redis</artifactId>
+      <version>1.8.3.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${org.springframework.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
           <groupId>javax.servlet</groupId>
@@ -100,11 +131,8 @@
       <artifactId>druid</artifactId>
       <version>0.2.22</version>
     </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>4.1.6.RELEASE</version>
-    </dependency>
+
+
     <!-- 映入JSON -->
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
@@ -187,11 +215,7 @@
           <artifactId>shiro-core</artifactId>
           <version>RELEASE</version>
       </dependency>
-      <dependency>
-          <groupId>org.springframework.session</groupId>
-          <artifactId>spring-session</artifactId>
-          <version>RELEASE</version>
-      </dependency>
+
       <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-compress</artifactId>
@@ -241,16 +265,6 @@
           <groupId>redis.clients</groupId>
           <artifactId>jedis</artifactId>
           <version>2.7.3</version>
-      </dependency>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-redis</artifactId>
-      <version>1.6.0.RELEASE</version>
-    </dependency>
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-test</artifactId>
-          <version>4.3.0.RELEASE</version>
       </dependency>
 
   </dependencies>
