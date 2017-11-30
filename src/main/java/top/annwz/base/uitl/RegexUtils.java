@@ -12,7 +12,7 @@ public class RegexUtils {
      * @return 验证成功返回true，验证失败返回false
      */ 
     public static boolean checkEmail(String email) { 
-        String regex = "\\w+@\\w+\\.[a-z]+(\\.[a-z]+)?"; 
+        String regex = "\\w+@\\w+\\.[a-z]+(\\.[a-z]+)?";
         return Pattern.matches(regex, email); 
     } 
      

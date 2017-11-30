@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 /**
  * Created by TJF on 2016/12/23 0023.
  */
-public class EmunUtil {
+public class EnumUtil {
 
     private static BufferedWriter out;
 
