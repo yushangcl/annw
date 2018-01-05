@@ -45,6 +45,11 @@ public class TranslationApi {
         return jsonArray.getString(0);
     }
 
+    public static Map<String, Object> translation(Map<String, Object> params) throws Exception {
+
+        return null;
+    }
+
     public static String requestForHttp(String url, Map<String, Object> requestParams) throws Exception {
         String result = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -113,46 +118,6 @@ public class TranslationApi {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             return null;
         }
-    }
-
-    /**
-     * 根据api地址和参数生成请求URL
-     *
-     * @param url
-     * @param params
-     * @return
-     */
-    public static String getUrlWithQueryString(String url, Map<String, Object> params) {
-        if (params == null) {
-            return url;
-        }
-
-        StringBuilder builder = new StringBuilder(url);
-        if (url.contains("?")) {
-            builder.append("&");
-        } else {
-            builder.append("?");
-        }
-
-        int i = 0;
-        for (String key : params.keySet()) {
-            String value = params.get(key).toString();
-            if (value == null) { // 过滤空的key
-                continue;
-            }
-
-            if (i != 0) {
-                builder.append('&');
-            }
-
-            builder.append(key);
-            builder.append('=');
-            builder.append(encode(value));
-
-            i++;
-        }
-
-        return builder.toString();
     }
 
     /**
