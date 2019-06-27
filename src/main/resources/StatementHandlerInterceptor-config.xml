@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+    <typeAliases>
+        <typeAlias alias="pageParameter" type="top.annwz.base.uitl.PageParameter"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="top.annwz.base.mybatis.StatementHandlerInterceptor"></plugin>
+    </plugins>
+</configuration>

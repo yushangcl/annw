@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo.xsd   
+          http://www.springframework.org/schema/beans   
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--声明配置文件-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="4"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:/service-config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置文件先配好-->
+    <mongo:mongo-client id="mongo"  replica-set="${mongodb.serverAddress}" credentials="${mongodb.credentials}">
+    </mongo:mongo-client>
+
+    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo" dbname="oms"/>
+
+    <bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext"/>
+
+    <bean id="mappingConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+        <constructor-arg ref="mongoDbFactory"/>
+        <constructor-arg ref="mappingContext"/>
+    </bean>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+        <constructor-arg name="mongoConverter" ref="mappingConverter"/>
+    </bean>
+
+    <bean id="mongoDao" class="cn.com.iscs.common.dao.MongoDao">
+        <constructor-arg ref="mongoTemplate"/>
+    </bean>
+
+
+</beans>

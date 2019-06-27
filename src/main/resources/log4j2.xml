@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="debug">
+	<properties>
+		<!-- 基本的文件的输出信息的配置 -->
+		<property name="LOG_HOME">../logs</property>
+		<!-- 日志备份目录 -->
+		<property name="SERVER_NAME">annw</property>
+		<property name="BACKUP_HOME">{LOG_HOME}/${SERVER_NAME}</property>
+		<property name="STAT_NAME">stat</property>
+	</properties>
+	<appenders>
+		<!-- 定义控制台输出 -->
+		<CONSOLE name="CONSOLE" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="%date{yyyyMMdd HH:mm:ss.SSS} %level [%thread]%l - %msg%n"/>
+		</CONSOLE>
+		<!-- 文件日志 -->
+		<RollingRandomAccessFile name="DAILY-ROLL-FILE" fileName="${LOG_HOME}/${SERVER_NAME}.log"
+								 filePattern="${LOG_HOME}/${SERVER_NAME}.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout pattern="%date{yyyyMMdd HH:mm:ss.SSS} %level [%thread]%l - %msg%n"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			</Policies>
+		</RollingRandomAccessFile>
+	</appenders>
+	<loggers>
+		<logger name="org.springframework" level="info" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="DAILY-ROLL-FILE"/>
+		</logger>
+		<logger name="java.sql" level="warn" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="DAILY-ROLL-FILE"/>
+		</logger>
+		<logger name="org.apache.ibatis" level="debug" additivity="false">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="DAILY-ROLL-FILE"/>
+		</logger>
+
+
+		<!-- 异步执行 -->
+		<!--<AsyncLogger name="cn.com.iscs.labor" level="debug" additivity="false">-->
+		<!--<appender-ref ref="CONSOLE" />-->
+		<!--</AsyncLogger>-->
+
+		<!-- Root Logger -->
+		<root level="debug">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="DAILY-ROLL-FILE"/>
+		</root>
+	</loggers>
+</configuration>  

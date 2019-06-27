@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.annwz.base.mapper.BaLogMapper">
+  <resultMap id="BaseResultMap" type="top.annwz.base.entity.BaLog">
+    <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="related_order_id" jdbcType="INTEGER" property="relatedOrderId" />
+    <result column="related_type" jdbcType="VARCHAR" property="relatedType" />
+    <result column="operation_name" jdbcType="VARCHAR" property="operationName" />
+    <result column="log_user_id" jdbcType="INTEGER" property="logUserId" />
+    <result column="log_remark" jdbcType="VARCHAR" property="logRemark" />
+    <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
+    <result column="log_dny1" jdbcType="VARCHAR" property="logDny1" />
+    <result column="log_dny2" jdbcType="VARCHAR" property="logDny2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, related_order_id, related_type, operation_name, log_user_id, log_remark, 
+    log_time, log_dny1, log_dny2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ba_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ba_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="top.annwz.base.entity.BaLog">
+    insert into ba_log (log_id, related_order_id, related_type, 
+      operation_name, log_user_id, log_remark, 
+      log_time, log_dny1, log_dny2
+      )
+    values (#{logId,jdbcType=INTEGER}, #{relatedOrderId,jdbcType=INTEGER}, #{relatedType,jdbcType=VARCHAR}, 
+      #{operationName,jdbcType=VARCHAR}, #{logUserId,jdbcType=INTEGER}, #{logRemark,jdbcType=VARCHAR}, 
+      sysdate(), #{logDny1,jdbcType=VARCHAR}, #{logDny2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.annwz.base.entity.BaLog">
+    insert into ba_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="relatedOrderId != null">
+        related_order_id,
+      </if>
+      <if test="relatedType != null">
+        related_type,
+      </if>
+      <if test="operationName != null">
+        operation_name,
+      </if>
+      <if test="logUserId != null">
+        log_user_id,
+      </if>
+      <if test="logRemark != null">
+        log_remark,
+      </if>
+      <if test="logTime != null">
+        log_time,
+      </if>
+      <if test="logDny1 != null">
+        log_dny1,
+      </if>
+      <if test="logDny2 != null">
+        log_dny2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="relatedOrderId != null">
+        #{relatedOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="relatedType != null">
+        #{relatedType,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null">
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="logUserId != null">
+        #{logUserId,jdbcType=INTEGER},
+      </if>
+      <if test="logRemark != null">
+        #{logRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logDny1 != null">
+        #{logDny1,jdbcType=VARCHAR},
+      </if>
+      <if test="logDny2 != null">
+        #{logDny2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.annwz.base.entity.BaLog">
+    update ba_log
+    <set>
+      <if test="relatedOrderId != null">
+        related_order_id = #{relatedOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="relatedType != null">
+        related_type = #{relatedType,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null">
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="logUserId != null">
+        log_user_id = #{logUserId,jdbcType=INTEGER},
+      </if>
+      <if test="logRemark != null">
+        log_remark = #{logRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logDny1 != null">
+        log_dny1 = #{logDny1,jdbcType=VARCHAR},
+      </if>
+      <if test="logDny2 != null">
+        log_dny2 = #{logDny2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.annwz.base.entity.BaLog">
+    update ba_log
+    set related_order_id = #{relatedOrderId,jdbcType=INTEGER},
+      related_type = #{relatedType,jdbcType=VARCHAR},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      log_user_id = #{logUserId,jdbcType=INTEGER},
+      log_remark = #{logRemark,jdbcType=VARCHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      log_dny1 = #{logDny1,jdbcType=VARCHAR},
+      log_dny2 = #{logDny2,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <select id="getsByMap" parameterType="java.util.HashMap" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from ba_user
+    where 1=1
+    <foreach collection="map.keys" item="_itemKey" open=""  separator="">
+      <if test="null != map[_itemKey]">
+        and ${_itemKey} = #{map[${_itemKey}]}
+      </if>
+    </foreach>
+  </select>
+  <select id="getCountByMap" parameterType="java.util.HashMap" resultType="java.lang.Integer" >
+    select count(1)
+    from ba_user
+    where 1=1
+    <foreach collection="map.keys" item="_itemKey" open=""  separator="">
+      <if test="null != map[_itemKey]">
+        and ${_itemKey} = #{map[${_itemKey}]}
+      </if>
+    </foreach>
+  </select>
+</mapper>
